@@ -14,8 +14,14 @@ describe('App', () => {
     expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(screen.queryByText(/aprende jugando/i)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: /elige temática/i })).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /dinosaurios/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /amistad/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /dinosaurios/i })).toContainElement(
+      screen.getByRole('img', { name: /dinosaurios/i }),
+    )
+    expect(screen.getByRole('img', { name: /dinosaurios/i })).toHaveAttribute('src', 'logo_seccion_dinosaurios.png')
+    expect(screen.getByRole('button', { name: /amistad/i })).toContainElement(
+      screen.getByRole('img', { name: /amistad/i }),
+    )
+    expect(screen.getByRole('img', { name: /amistad/i })).toHaveAttribute('src', 'logo_amistad.png')
   })
 
   it('opens the dinosaur game list before starting its game', () => {
