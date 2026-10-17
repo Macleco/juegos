@@ -27,7 +27,7 @@ describe('JurassicSumsGame', () => {
 
     expect(screen.getByText(/¿cuántos hay en el primer grupo/i)).toBeInTheDocument()
     expect(wrongOption).toHaveClass('wrong')
-    expect(screen.getByRole('status')).toHaveTextContent(/prueba otro número/i)
+    expect(screen.getByRole('status')).toBeEmptyDOMElement()
   })
 
   it('exposes each dinosaur as a countable item in both groups', () => {

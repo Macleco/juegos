@@ -36,7 +36,6 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
   const [wrongValue, setWrongValue] = useState<number | null>(null)
-  const [feedback, setFeedback] = useState('')
   const feedbackTimer = useRef<number | undefined>(undefined)
   const activeIndex = STEP_INDEX[state.step]
   const [left, right, total] = state.selected
@@ -53,21 +52,18 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
     setSettings(false)
     setCelebrate(false)
     setWrongValue(null)
-    setFeedback('')
   }
 
   const answer = (value: number) => {
     const result = answerCurrentStep(state, value)
     if (!result.accepted) {
       setWrongValue(value)
-      setFeedback('Prueba otro número.')
       if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current)
       feedbackTimer.current = window.setTimeout(() => setWrongValue(null), 450)
       return
     }
 
     setWrongValue(null)
-    setFeedback('')
     setState(result.state)
     if (result.state.completed) setCelebrate(true)
   }
@@ -76,13 +72,13 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
     <GameHeader title="Sumas jurásicas" onHome={onHome} onRestart={restart} onSettings={() => setSettings(true)} />
     <section className="sum-board" aria-label="Suma de dinosaurios">
       <DinosaurGroup position="primer" dinosaurs={state.round.leftGroup} />
-      <div className="sum-symbols" aria-hidden="true"><span>+</span><span>=</span></div>
+      <div className="sum-symbols" aria-hidden="true"><span>+</span></div>
       <DinosaurGroup position="segundo" dinosaurs={state.round.rightGroup} />
     </section>
     <section className="sum-answer-area" aria-label="Resolver la suma">
       <p className="sum-equation" aria-label={`Ecuación: ${equation}`}>{equation}</p>
       <p className="sum-prompt" aria-live="polite">{state.completed ? '¡Suma completada!' : promptFor(state.step)}</p>
-      <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : feedback}</p>
+      <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : ''}</p>
       {!state.completed && <div className="sum-options" role="group" aria-label="Respuestas posibles">
         {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValue === option ? 'wrong' : ''}`} onClick={() => answer(option)}>{option}</button>)}
       </div>}
