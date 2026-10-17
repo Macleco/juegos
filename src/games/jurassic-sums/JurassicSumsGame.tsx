@@ -25,7 +25,9 @@ function promptFor(step: keyof typeof STEP_INDEX) {
 
 function DinosaurGroup({ position, dinosaurs }: { position: 'primer' | 'segundo'; dinosaurs: JurassicSumsRound['leftGroup'] }) {
   return <section className="sum-dinosaur-group" aria-label={`${position} grupo de dinosaurios`}>
-    {dinosaurs.map((dinosaur, index) => <img key={`${dinosaur.id}-${index}`} src={dinosaur.image} alt="" />)}
+    <ul className="sum-dinosaur-list" aria-label={`${position} grupo de dinosaurios`}>
+      {dinosaurs.map((dinosaur, index) => <li key={`${dinosaur.id}-${index}`}><img src={dinosaur.image} alt={`Dinosaurio ${index + 1}: ${dinosaur.name}`} /></li>)}
+    </ul>
   </section>
 }
 
@@ -34,6 +36,7 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
   const [wrongValue, setWrongValue] = useState<number | null>(null)
+  const [feedback, setFeedback] = useState('')
   const feedbackTimer = useRef<number | undefined>(undefined)
   const activeIndex = STEP_INDEX[state.step]
   const [left, right, total] = state.selected
@@ -50,18 +53,21 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
     setSettings(false)
     setCelebrate(false)
     setWrongValue(null)
+    setFeedback('')
   }
 
   const answer = (value: number) => {
     const result = answerCurrentStep(state, value)
     if (!result.accepted) {
       setWrongValue(value)
+      setFeedback('Prueba otro número.')
       if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current)
       feedbackTimer.current = window.setTimeout(() => setWrongValue(null), 450)
       return
     }
 
     setWrongValue(null)
+    setFeedback('')
     setState(result.state)
     if (result.state.completed) setCelebrate(true)
   }
@@ -75,10 +81,11 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
     </section>
     <section className="sum-answer-area" aria-label="Resolver la suma">
       <p className="sum-equation" aria-label={`Ecuación: ${equation}`}>{equation}</p>
-      <p className="sum-prompt" aria-live="polite">{promptFor(state.step)}</p>
-      <div className="sum-options" role="group" aria-label="Respuestas posibles">
+      <p className="sum-prompt" aria-live="polite">{state.completed ? '¡Suma completada!' : promptFor(state.step)}</p>
+      <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : feedback}</p>
+      {!state.completed && <div className="sum-options" role="group" aria-label="Respuestas posibles">
         {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option ${wrongValue === option ? 'wrong' : ''}`} onClick={() => answer(option)}>{option}</button>)}
-      </div>
+      </div>}
     </section>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}
     {celebrate && <Modal title="🎉 ¡Muy bien! 🎉" onClose={() => setCelebrate(false)}><p>¡Has contado los dinosaurios y resuelto la suma!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}

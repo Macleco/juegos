@@ -27,6 +27,14 @@ describe('JurassicSumsGame', () => {
 
     expect(screen.getByText(/¿cuántos hay en el primer grupo/i)).toBeInTheDocument()
     expect(wrongOption).toHaveClass('wrong')
+    expect(screen.getByRole('status')).toHaveTextContent(/prueba otro número/i)
+  })
+
+  it('exposes each dinosaur as a countable item in both groups', () => {
+    render(<JurassicSumsGame createRound={createTestRound} />)
+
+    expect(within(screen.getByRole('list', { name: /primer grupo/i })).getAllByRole('listitem')).toHaveLength(2)
+    expect(within(screen.getByRole('list', { name: /segundo grupo/i })).getAllByRole('listitem')).toHaveLength(3)
   })
 
   it('restarts from the first counting step and closes the celebration', () => {
@@ -37,5 +45,15 @@ describe('JurassicSumsGame', () => {
 
     expect(screen.getByText(/¿cuántos hay en el primer grupo/i)).toBeInTheDocument()
     expect(screen.queryByText(/¡muy bien!/i)).not.toBeInTheDocument()
+  })
+
+  it('does not offer more answers after closing the completion dialog', () => {
+    render(<JurassicSumsGame createRound={createTestRound} />)
+
+    ;[2, 3, 5].forEach((value) => fireEvent.click(screen.getByRole('button', { name: String(value) })))
+    fireEvent.click(screen.getByRole('button', { name: /cerrar/i }))
+
+    expect(screen.queryByRole('group', { name: /respuestas/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent(/suma completada/i)
   })
 })

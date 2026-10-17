@@ -38,8 +38,11 @@ function chooseGroup(dinosaurs: readonly Dinosaur[], count: number, start: numbe
 
 function createOptions(answer: number, minimum: number, maximum: number): number[] {
   const values = [answer]
-  for (let value = minimum; value <= maximum && values.length < 4; value += 1) {
-    if (value !== answer) values.push(value)
+  for (let distance = 1; values.length < 4; distance += 1) {
+    const lower = answer - distance
+    const higher = answer + distance
+    if (lower >= minimum) values.push(lower)
+    if (values.length < 4 && higher <= maximum) values.push(higher)
   }
   return shuffle(values)
 }

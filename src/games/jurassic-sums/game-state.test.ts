@@ -29,6 +29,12 @@ describe('jurassic sums game rules', () => {
     expect(round.options[2].every((value) => value >= 2 && value <= 18)).toBe(true)
   })
 
+  it('uses nearby distractors so a large total cannot be identified by magnitude alone', () => {
+    const round = createRoundForCounts(DINOSAURS, 9, 9)
+
+    expect(round.options[2]).toEqual(expect.arrayContaining([15, 16, 17, 18]))
+  })
+
   it('cycles only when the source contains fewer dinosaurs than a requested group', () => {
     const round = createRoundForCounts(DINOSAURS.slice(0, 3), 4, 2)
 
