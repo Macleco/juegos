@@ -1,29 +1,24 @@
 interface GameMenuProps {
-  onStartDinosaurDiet: () => void
+  onOpenDinosaurGames: () => void
   onStartFriendshipSignals: () => void
 }
 
-export function GameMenu({ onStartDinosaurDiet, onStartFriendshipSignals }: GameMenuProps) {
+export function GameMenu({ onOpenDinosaurGames, onStartFriendshipSignals }: GameMenuProps) {
   return (
     <main className="game-menu">
       <header className="game-menu-header">
-        <h1>Elige un juego</h1>
-        <p>Aprende jugando.</p>
+        <h1>Juegos interactivos</h1>
+        <p className="game-menu-kicker">Aprende jugando</p>
+        <h2>Elige temática</h2>
       </header>
-      <section className="game-menu-list" aria-label="Juegos disponibles">
-        <button className="game-menu-card" onClick={onStartDinosaurDiet}>
-          <span className="game-menu-icon" aria-hidden="true">🦕</span>
-          <span>
-            <strong>¿Qué comía cada dinosaurio?</strong>
-            <small>Clasifica dinosaurios en herbívoros y carnívoros.</small>
-          </span>
+      <section className="theme-menu-list" aria-label="Temáticas disponibles">
+        <button className="theme-menu-card dinosaur-theme-card" onClick={onOpenDinosaurGames}>
+          <img src="dinos/triceratops.jpg" alt="" />
+          <strong>Dinosaurios</strong>
         </button>
-        <button className="game-menu-card friendship-menu-card" onClick={onStartFriendshipSignals}>
-          <span className="game-menu-icon" aria-hidden="true">🤝</span>
-          <span>
-            <strong>Señales de mis amistades</strong>
-            <small>Clasifica situaciones que pueden pasar con tus amistades.</small>
-          </span>
+        <button className="theme-menu-card friendship-theme-card" onClick={onStartFriendshipSignals}>
+          <img src="imagenes_amistad/abrazar.png" alt="" />
+          <strong>Amistad</strong>
         </button>
       </section>
     </main>
