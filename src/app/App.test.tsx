@@ -36,6 +36,21 @@ describe('App', () => {
     expect(window.location.hash).toBe('')
   })
 
+  it('opens the dinosaur name game and returns home', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
+    fireEvent.click(screen.getByRole('button', { name: /cómo se llama el dinosaurio/i }))
+
+    expect(screen.getByRole('heading', { name: /cómo se llama el dinosaurio/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/dinosaur-name')
+
+    fireEvent.click(screen.getByRole('button', { name: /inicio/i }))
+
+    expect(screen.getByRole('heading', { name: /juegos interactivos/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('')
+  })
+
   it('opens the friendship signals game from the menu', () => {
     render(<App />)
 
