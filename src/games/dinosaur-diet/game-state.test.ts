@@ -10,11 +10,11 @@ describe('dinosaur diet game rules', () => {
     expect(DINOSAURS.filter(({ diet }) => diet === 'carnivore')).toHaveLength(8)
 
     expect(DINOSAURS.slice(-5)).toEqual([
-      { id: 'ampelosaurus', name: 'Ampelosaurus', diet: 'herbivore', image: 'dinos/ampelosaurus.jpg' },
-      { id: 'brachiosaurus', name: 'Brachiosaurus', diet: 'herbivore', image: 'dinos/brachiosaurus.jpg' },
-      { id: 'brontosaurus', name: 'Brontosaurus', diet: 'herbivore', image: 'dinos/brontosaurus.jpg' },
-      { id: 'pteranodon', name: 'Pteranodon', diet: 'carnivore', image: 'dinos/pteranodon.jpg' },
-      { id: 'pterodactyl', name: 'Pterodactyl', diet: 'carnivore', image: 'dinos/pterodactyl.jpg' },
+      { id: 'ampelosaurus', name: 'Ampelosaurus', diet: 'herbivore', image: 'dinos/ampelosaurus.png' },
+      { id: 'brachiosaurus', name: 'Brachiosaurus', diet: 'herbivore', image: 'dinos/brachiosaurus.png' },
+      { id: 'brontosaurus', name: 'Brontosaurus', diet: 'herbivore', image: 'dinos/brontosaurus.png' },
+      { id: 'pteranodon', name: 'Pteranodon', diet: 'carnivore', image: 'dinos/pteranodon.png' },
+      { id: 'pterodactyl', name: 'Pterodactyl', diet: 'carnivore', image: 'dinos/pterodactyl.png' },
     ])
   })
 
@@ -22,23 +22,23 @@ describe('dinosaur diet game rules', () => {
     const images = DINOSAURS.map(({ image }) => image)
 
     expect(images).toEqual([
-      'dinos/triceratops.jpg',
-      'dinos/diplodocus.jpg',
-      'dinos/pachycephalosaurus.jpg',
-      'dinos/stegosaurus.jpg',
-      'dinos/ankylosaurus.jpg',
-      'dinos/parasaurolophus.jpg',
-      'dinos/tyrannosaurus-rex.jpg',
-      'dinos/velociraptor.jpg',
-      'dinos/spinosaurus.jpg',
-      'dinos/giganotosaurus.jpg',
-      'dinos/carnotaurus.jpg',
-      'dinos/dilophosaurus.jpg',
-      'dinos/ampelosaurus.jpg',
-      'dinos/brachiosaurus.jpg',
-      'dinos/brontosaurus.jpg',
-      'dinos/pteranodon.jpg',
-      'dinos/pterodactyl.jpg',
+      'dinos/triceratops.png',
+      'dinos/diplodocus.png',
+      'dinos/pachycephalosaurus.png',
+      'dinos/stegosaurus.png',
+      'dinos/ankylosaurus.png',
+      'dinos/parasaurolophus.png',
+      'dinos/tyrannosaurus-rex.png',
+      'dinos/velociraptor.png',
+      'dinos/spinosaurus.png',
+      'dinos/giganotosaurus.png',
+      'dinos/carnotaurus.png',
+      'dinos/dilophosaurus.png',
+      'dinos/ampelosaurus.png',
+      'dinos/brachiosaurus.png',
+      'dinos/brontosaurus.png',
+      'dinos/pteranodon.png',
+      'dinos/pterodactyl.png',
     ])
     expect(new Set(images).size).toBe(17)
   })

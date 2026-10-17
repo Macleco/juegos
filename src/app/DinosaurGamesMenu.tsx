@@ -14,14 +14,14 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
       </header>
       <section className="dinosaur-games-list" aria-label="Juegos de dinosaurios">
         <button className="game-menu-card dinosaur-game-card" onClick={onStartDinosaurDiet}>
-          <img src="dinos/triceratops.jpg" alt="" />
+          <img src="dinos/triceratops.png" alt="" />
           <span>
             <strong>¿Qué comía cada dinosaurio?</strong>
             <small>Clasifica dinosaurios en herbívoros y carnívoros.</small>
           </span>
         </button>
         <button className="game-menu-card dinosaur-game-card dinosaur-name-menu-card" onClick={onStartDinosaurName}>
-          <img src="dinos/stegosaurus.jpg" alt="" />
+          <img src="dinos/stegosaurus.png" alt="" />
           <span>
             <strong>¿Cómo se llama el dinosaurio?</strong>
             <small>Relaciona cada fotografía con su nombre.</small>

@@ -13,7 +13,7 @@ export function GameMenu({ onOpenDinosaurGames, onStartFriendshipSignals }: Game
       </header>
       <section className="theme-menu-list" aria-label="Temáticas disponibles">
         <button className="theme-menu-card dinosaur-theme-card" onClick={onOpenDinosaurGames}>
-          <img src="dinos/triceratops.jpg" alt="" />
+          <img src="dinos/triceratops.png" alt="" />
           <strong>Dinosaurios</strong>
         </button>
         <button className="theme-menu-card friendship-theme-card" onClick={onStartFriendshipSignals}>

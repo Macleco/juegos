@@ -8,7 +8,7 @@ describe('DinosaurDietGame', () => {
     const activeCard = screen.getByTestId('active-dinosaur-card')
     expect(screen.getAllByTestId('active-dinosaur-card')).toHaveLength(1)
     expect(activeCard.parentElement).toHaveClass('deck-card')
-    expect(within(activeCard).getByRole('img')).toHaveAttribute('src', expect.stringMatching(/^dinos\/.+\.jpg$/))
+    expect(within(activeCard).getByRole('img')).toHaveAttribute('src', expect.stringMatching(/^dinos\/.+\.png$/))
     expect(screen.getByText('0 / 8')).toBeInTheDocument()
   })
 
