@@ -20,4 +20,9 @@ export const DINOSAURS: readonly Dinosaur[] = [
   { id: 'giganotosaurus', name: 'Giganotosaurus', diet: 'carnivore', image: 'dinos/giganotosaurus.jpg' },
   { id: 'carnotaurus', name: 'Carnotaurus', diet: 'carnivore', image: 'dinos/carnotaurus.jpg' },
   { id: 'dilophosaurus', name: 'Dilophosaurus', diet: 'carnivore', image: 'dinos/dilophosaurus.jpg' },
+  { id: 'ampelosaurus', name: 'Ampelosaurus', diet: 'herbivore', image: 'dinos/ampelosaurus.jpg' },
+  { id: 'brachiosaurus', name: 'Brachiosaurus', diet: 'herbivore', image: 'dinos/brachiosaurus.jpg' },
+  { id: 'brontosaurus', name: 'Brontosaurus', diet: 'herbivore', image: 'dinos/brontosaurus.jpg' },
+  { id: 'pteranodon', name: 'Pteranodon', diet: 'carnivore', image: 'dinos/pteranodon.jpg' },
+  { id: 'pterodactyl', name: 'Pterodactyl', diet: 'carnivore', image: 'dinos/pterodactyl.jpg' },
 ]

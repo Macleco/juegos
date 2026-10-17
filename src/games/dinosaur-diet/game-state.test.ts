@@ -4,10 +4,18 @@ import { DINOSAURS } from '../../data/dinosaurs'
 import { classifyCurrentCard, createGameState, selectRound, shuffle } from './game-state'
 
 describe('dinosaur diet game rules', () => {
-  it('contains twelve dinosaurs split evenly by diet', () => {
-    expect(DINOSAURS).toHaveLength(12)
-    expect(DINOSAURS.filter(({ diet }) => diet === 'herbivore')).toHaveLength(6)
-    expect(DINOSAURS.filter(({ diet }) => diet === 'carnivore')).toHaveLength(6)
+  it('includes the new dinosaurs with their agreed diets', () => {
+    expect(DINOSAURS).toHaveLength(17)
+    expect(DINOSAURS.filter(({ diet }) => diet === 'herbivore')).toHaveLength(9)
+    expect(DINOSAURS.filter(({ diet }) => diet === 'carnivore')).toHaveLength(8)
+
+    expect(DINOSAURS.slice(-5)).toEqual([
+      { id: 'ampelosaurus', name: 'Ampelosaurus', diet: 'herbivore', image: 'dinos/ampelosaurus.jpg' },
+      { id: 'brachiosaurus', name: 'Brachiosaurus', diet: 'herbivore', image: 'dinos/brachiosaurus.jpg' },
+      { id: 'brontosaurus', name: 'Brontosaurus', diet: 'herbivore', image: 'dinos/brontosaurus.jpg' },
+      { id: 'pteranodon', name: 'Pteranodon', diet: 'carnivore', image: 'dinos/pteranodon.jpg' },
+      { id: 'pterodactyl', name: 'Pterodactyl', diet: 'carnivore', image: 'dinos/pterodactyl.jpg' },
+    ])
   })
 
   it('assigns a unique site-relative public photograph to every dinosaur', () => {
@@ -26,8 +34,13 @@ describe('dinosaur diet game rules', () => {
       'dinos/giganotosaurus.jpg',
       'dinos/carnotaurus.jpg',
       'dinos/dilophosaurus.jpg',
+      'dinos/ampelosaurus.jpg',
+      'dinos/brachiosaurus.jpg',
+      'dinos/brontosaurus.jpg',
+      'dinos/pteranodon.jpg',
+      'dinos/pterodactyl.jpg',
     ])
-    expect(new Set(images).size).toBe(12)
+    expect(new Set(images).size).toBe(17)
   })
 
   it('shuffles without losing or mutating dinosaurs', () => {
