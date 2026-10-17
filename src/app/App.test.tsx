@@ -52,6 +52,21 @@ describe('App', () => {
     expect(window.location.hash).toBe('')
   })
 
+  it('opens Jurassic Sums from the dinosaur menu and returns home', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
+    fireEvent.click(screen.getByRole('button', { name: /sumas jurásicas/i }))
+
+    expect(screen.getByRole('heading', { name: /sumas jurásicas/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/jurassic-sums')
+
+    fireEvent.click(screen.getByRole('button', { name: /inicio/i }))
+
+    expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
+    expect(window.location.hash).toBe('')
+  })
+
   it('opens the friendship signals game from the menu', () => {
     render(<App />)
 

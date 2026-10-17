@@ -2,9 +2,10 @@ interface DinosaurGamesMenuProps {
   onBack: () => void
   onStartDinosaurDiet: () => void
   onStartDinosaurName: () => void
+  onStartJurassicSums: () => void
 }
 
-export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName }: DinosaurGamesMenuProps) {
+export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums }: DinosaurGamesMenuProps) {
   return (
     <main className="game-menu dinosaur-games-menu">
       <header className="game-menu-header">
@@ -25,6 +26,13 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           <span>
             <strong>¿Cómo se llama el dinosaurio?</strong>
             <small>Relaciona cada fotografía con su nombre.</small>
+          </span>
+        </button>
+        <button className="game-menu-card dinosaur-game-card" onClick={onStartJurassicSums}>
+          <img src="dinos/pteranodon.png" alt="" />
+          <span>
+            <strong>Sumas jurásicas</strong>
+            <small>Cuenta los dinosaurios y resuelve la suma.</small>
           </span>
         </button>
       </section>
