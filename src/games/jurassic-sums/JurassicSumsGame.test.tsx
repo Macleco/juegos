@@ -37,6 +37,14 @@ describe('JurassicSumsGame', () => {
     expect(within(screen.getByRole('list', { name: /segundo grupo/i })).getAllByRole('listitem')).toHaveLength(3)
   })
 
+  it('presents each answer as an egg-shaped choice', () => {
+    render(<JurassicSumsGame createRound={createTestRound} />)
+
+    within(screen.getByRole('group', { name: /respuestas/i })).getAllByRole('button').forEach((button) => {
+      expect(button).toHaveClass('egg-option')
+    })
+  })
+
   it('restarts from the first counting step and closes the celebration', () => {
     render(<JurassicSumsGame createRound={createTestRound} />)
 

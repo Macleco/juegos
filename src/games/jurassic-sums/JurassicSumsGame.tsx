@@ -84,7 +84,7 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
       <p className="sum-prompt" aria-live="polite">{state.completed ? '¡Suma completada!' : promptFor(state.step)}</p>
       <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : feedback}</p>
       {!state.completed && <div className="sum-options" role="group" aria-label="Respuestas posibles">
-        {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option ${wrongValue === option ? 'wrong' : ''}`} onClick={() => answer(option)}>{option}</button>)}
+        {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValue === option ? 'wrong' : ''}`} onClick={() => answer(option)}>{option}</button>)}
       </div>}
     </section>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}

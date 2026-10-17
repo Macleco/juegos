@@ -35,12 +35,14 @@ describe('jurassic sums game rules', () => {
     expect(round.options[2]).toEqual(expect.arrayContaining([15, 16, 17, 18]))
   })
 
-  it('cycles only when the source contains fewer dinosaurs than a requested group', () => {
-    const round = createRoundForCounts(DINOSAURS.slice(0, 3), 4, 2)
+  it('uses one dinosaur species per group and different species between groups', () => {
+    const round = createRoundForCounts(DINOSAURS, 4, 2)
 
     expect(round.leftGroup).toHaveLength(4)
     expect(round.rightGroup).toHaveLength(2)
-    expect(new Set(round.rightGroup.map(({ id }) => id))).toHaveLength(2)
+    expect(new Set(round.leftGroup.map(({ id }) => id))).toHaveLength(1)
+    expect(new Set(round.rightGroup.map(({ id }) => id))).toHaveLength(1)
+    expect(round.leftGroup[0].id).not.toBe(round.rightGroup[0].id)
   })
 
   it('records correct answers in order and completes after the total', () => {

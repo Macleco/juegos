@@ -31,9 +31,10 @@ function shuffle<T>(items: readonly T[]): T[] {
   return result
 }
 
-function chooseGroup(dinosaurs: readonly Dinosaur[], count: number, start: number): Dinosaur[] {
+function chooseGroup(dinosaurs: readonly Dinosaur[], count: number, speciesIndex: number): Dinosaur[] {
   if (dinosaurs.length === 0) throw new Error('At least one dinosaur is required')
-  return Array.from({ length: count }, (_, index) => dinosaurs[(start + index) % dinosaurs.length])
+  const dinosaur = dinosaurs[speciesIndex % dinosaurs.length]
+  return Array.from({ length: count }, () => dinosaur)
 }
 
 function createOptions(answer: number, minimum: number, maximum: number): number[] {
@@ -57,7 +58,7 @@ export function createRoundForCounts(
   }
 
   const leftGroup = chooseGroup(dinosaurs, leftCount, 0)
-  const rightGroup = chooseGroup(dinosaurs, rightCount, leftCount)
+  const rightGroup = chooseGroup(dinosaurs, rightCount, 1)
   const total = leftCount + rightCount
 
   return {
@@ -76,7 +77,7 @@ export function createRoundForCounts(
 export function createRound(dinosaurs: readonly Dinosaur[]): JurassicSumsRound {
   const leftCount = Math.floor(Math.random() * 9) + 1
   const rightCount = Math.floor(Math.random() * 9) + 1
-  return createRoundForCounts(dinosaurs, leftCount, rightCount)
+  return createRoundForCounts(shuffle(dinosaurs), leftCount, rightCount)
 }
 
 export function createGameState(round: JurassicSumsRound): JurassicSumsState {
