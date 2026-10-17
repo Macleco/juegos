@@ -11,7 +11,7 @@ describe('App', () => {
   it('shows the game menu at the root URL', () => {
     render(<App />)
 
-    expect(screen.getByRole('heading', { name: /juegos interactivos/i })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(screen.getByRole('heading', { name: /elige temática/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /dinosaurios/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /amistad/i })).toBeInTheDocument()
@@ -32,7 +32,7 @@ describe('App', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /inicio/i }))
 
-    expect(screen.getByRole('heading', { name: /juegos interactivos/i })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(window.location.hash).toBe('')
   })
 
@@ -47,7 +47,7 @@ describe('App', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /inicio/i }))
 
-    expect(screen.getByRole('heading', { name: /juegos interactivos/i })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(window.location.hash).toBe('')
   })
 

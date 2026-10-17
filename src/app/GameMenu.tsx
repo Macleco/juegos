@@ -7,7 +7,9 @@ export function GameMenu({ onOpenDinosaurGames, onStartFriendshipSignals }: Game
   return (
     <main className="game-menu">
       <header className="game-menu-header">
-        <h1>Juegos interactivos</h1>
+        <h1 className="game-menu-logo">
+          <img src="logo.png" alt="Juegos interactivos" />
+        </h1>
         <p className="game-menu-kicker">Aprende jugando</p>
         <h2>Elige temática</h2>
       </header>
