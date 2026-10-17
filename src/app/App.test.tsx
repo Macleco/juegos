@@ -13,7 +13,7 @@ describe('App', () => {
 
     expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(screen.queryByText(/aprende jugando/i)).not.toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /elige temática/i })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: /elige temática/i })).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: /dinosaurios/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /amistad/i })).toBeInTheDocument()
   })

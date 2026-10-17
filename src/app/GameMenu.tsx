@@ -10,7 +10,6 @@ export function GameMenu({ onOpenDinosaurGames, onStartFriendshipSignals }: Game
         <h1 className="game-menu-logo">
           <img src="logo.png" alt="Juegos interactivos" />
         </h1>
-        <h2>Elige temática</h2>
       </header>
       <section className="theme-menu-list" aria-label="Temáticas disponibles">
         <button className="theme-menu-card dinosaur-theme-card" onClick={onOpenDinosaurGames}>
