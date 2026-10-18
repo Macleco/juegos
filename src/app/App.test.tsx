@@ -33,6 +33,10 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /dinosaurios/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /elige un juego/i })).toBeInTheDocument()
+    const gameLogos = screen.getAllByAltText('')
+    expect(gameLogos[0]).toHaveAttribute('src', 'logo_herbivoros.png')
+    expect(gameLogos[1]).toHaveAttribute('src', 'logo_juego_nombres.png')
+    expect(gameLogos[2]).toHaveAttribute('src', 'logo_sumas.png')
 
     fireEvent.click(screen.getByRole('button', { name: /qué comía cada dinosaurio/i }))
 
