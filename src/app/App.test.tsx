@@ -14,16 +14,16 @@ describe('App', () => {
     expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(screen.queryByText(/aprende jugando/i)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: /elige temática/i })).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Dinosaurios' })).toContainElement(
-      screen.getByRole('img', { name: /dinosaurios/i }),
+    expect(screen.getByRole('button', { name: 'DINOSAURIOS' })).toContainElement(
+      screen.getAllByAltText('')[0],
     )
-    expect(screen.getByRole('img', { name: /dinosaurios/i })).toHaveAttribute('src', 'logo_seccion_dinosaurios.png')
-    expect(screen.getByRole('button', { name: 'Amistad' })).toContainElement(
-      screen.getByRole('img', { name: /amistad/i }),
+    expect(screen.getAllByAltText('')[0]).toHaveAttribute('src', 'logo_dinosaurios_no_texto.png')
+    expect(screen.getByRole('button', { name: 'AMISTAD' })).toContainElement(
+      screen.getAllByAltText('')[1],
     )
-    expect(screen.getByRole('img', { name: /amistad/i })).toHaveAttribute('src', 'logo_amistad.png')
-    expect(screen.queryByText('Dinosaurios')).not.toBeInTheDocument()
-    expect(screen.queryByText('Amistad')).not.toBeInTheDocument()
+    expect(screen.getAllByAltText('')[1]).toHaveAttribute('src', 'amistad_no_texto.png')
+    expect(screen.getByText('DINOSAURIOS')).toBeInTheDocument()
+    expect(screen.getByText('AMISTAD')).toBeInTheDocument()
   })
 
   it('opens the dinosaur game list before starting its game', () => {
