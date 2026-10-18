@@ -50,9 +50,9 @@ export function App() {
     setRoute('')
   }
 
-  if (route === DINOSAUR_DIET_HASH) return <DinosaurDietGame onHome={returnToMenu} />
-  if (route === DINOSAUR_NAME_HASH) return <DinosaurNameGame onHome={returnToMenu} />
-  if (route === DINOSAUR_SUMS_HASH) return <JurassicSumsGame onHome={returnToMenu} />
+  if (route === DINOSAUR_DIET_HASH) return <DinosaurDietGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
+  if (route === DINOSAUR_NAME_HASH) return <DinosaurNameGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
+  if (route === DINOSAUR_SUMS_HASH) return <JurassicSumsGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
   if (route === DINOSAUR_GAMES_HASH) {
     return <DinosaurGamesMenu onBack={returnToMenu} onStartDinosaurDiet={openDinosaurDiet} onStartDinosaurName={openDinosaurName} onStartJurassicSums={openJurassicSums} />
   }

@@ -79,6 +79,23 @@ describe('App', () => {
     expect(window.location.hash).toBe('')
   })
 
+  it.each([
+    ['¿Qué comía cada dinosaurio?', '#/dinosaur-diet'],
+    ['¿Cómo se llama el dinosaurio?', '#/dinosaur-name'],
+    ['Sumas jurásicas', '#/jurassic-sums'],
+  ])('returns from %s to the dinosaur game category', (gameName, expectedHash) => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
+    fireEvent.click(screen.getByRole('button', { name: (name) => name.startsWith(gameName) }))
+    expect(window.location.hash).toBe(expectedHash)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Juegos de dinosaurios' }))
+
+    expect(screen.getByRole('heading', { name: /elige un juego/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/dinosaur-games')
+  })
+
   it('opens the friendship signals game from the menu', () => {
     render(<App />)
 

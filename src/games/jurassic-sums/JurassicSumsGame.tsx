@@ -14,6 +14,7 @@ const STEP_INDEX = { left: 0, right: 1, total: 2 } as const
 
 interface JurassicSumsGameProps {
   onHome?: () => void
+  onDinosaurGames?: () => void
   createRound?: () => JurassicSumsRound
 }
 
@@ -31,7 +32,7 @@ function DinosaurGroup({ position, dinosaurs }: { position: 'primer' | 'segundo'
   </section>
 }
 
-export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = () => createRound(DINOSAURS) }: JurassicSumsGameProps) {
+export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}, createRound: makeRound = () => createRound(DINOSAURS) }: JurassicSumsGameProps) {
   const [state, setState] = useState(() => createGameState(makeRound()))
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
@@ -69,7 +70,7 @@ export function JurassicSumsGame({ onHome = () => {}, createRound: makeRound = (
   }
 
   return <main className="game-shell jurassic-sums-game">
-    <GameHeader title="Sumas jurásicas" onHome={onHome} onRestart={restart} onSettings={() => setSettings(true)} />
+    <GameHeader title="Sumas jurásicas" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
     <section className="sum-board" aria-label="Suma de dinosaurios">
       <DinosaurGroup position="primer" dinosaurs={state.round.leftGroup} />
       <div className="sum-symbols" aria-hidden="true"><span>+</span></div>

@@ -22,13 +22,13 @@ function Zone({ diet, dinosaurs }: { diet: Diet; dinosaurs: readonly Dinosaur[] 
     <h2>{herbivore ? <Leaf aria-hidden="true" /> : <Drumstick aria-hidden="true" />} {herbivore ? 'HERBÍVOROS' : 'CARNÍVOROS'}</h2><div className="classified">{dinosaurs.map(dinosaur => <Card key={dinosaur.id} dinosaur={dinosaur} />)}</div>
   </section>
 }
-export function DinosaurDietGame({ onHome = () => {} }: { onHome?: () => void }) {
+export function DinosaurDietGame({ onHome = () => {}, onDinosaurGames = () => {} }: { onHome?: () => void; onDinosaurGames?: () => void }) {
   const [state, setState] = useState(() => createGameState(selectRound(DINOSAURS)))
   const [settings, setSettings] = useState(false); const [celebrate, setCelebrate] = useState(false); const [wrong, setWrong] = useState(false)
   const current = state.deck[0]; const total = state.deck.length + state.classifiedHerbivores.length + state.classifiedCarnivores.length; const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
   const restart = () => { setState(createGameState(selectRound(DINOSAURS))); setCelebrate(false); setSettings(false) }
   const classify = (target: Diet) => { const result = classifyCurrentCard(state, target); if (!result.accepted) { setWrong(true); window.setTimeout(() => setWrong(false), 450); return }; setState(result.state); if (result.state.completed) window.setTimeout(() => setCelebrate(true), 350) }
-  return <main className="game-shell"><GameHeader onHome={onHome} onRestart={restart} onSettings={() => setSettings(true)} />
+  return <main className="game-shell"><GameHeader onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
     <DndContext sensors={sensors} onDragEnd={({ over }) => { if (over?.id === 'herbivore' || over?.id === 'carnivore') classify(over.id) }}>
       <div className="zones"><Zone diet="herbivore" dinosaurs={state.classifiedHerbivores} /><Zone diet="carnivore" dinosaurs={state.classifiedCarnivores} /></div>
       <div className="game-bottom">

@@ -24,7 +24,7 @@ function NameCard({ dinosaur, wrong }: { dinosaur: Dinosaur; wrong: boolean }) {
   </article>
 }
 
-export function DinosaurNameGame({ onHome = () => {} }: { onHome?: () => void }) {
+export function DinosaurNameGame({ onHome = () => {}, onDinosaurGames = () => {} }: { onHome?: () => void; onDinosaurGames?: () => void }) {
   const [state, setState] = useState(() => createGameState(selectRound(DINOSAURS)))
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
@@ -57,7 +57,7 @@ export function DinosaurNameGame({ onHome = () => {} }: { onHome?: () => void })
   }
 
   return <main className="game-shell dinosaur-name-game">
-    <GameHeader title="¿Cómo se llama el dinosaurio?" onHome={onHome} onRestart={restart} onSettings={() => setSettings(true)} />
+    <GameHeader title="¿Cómo se llama el dinosaurio?" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
     <DndContext sensors={sensors} onDragEnd={({ over }) => { if (typeof over?.id === 'string') match(over.id) }}>
       <section className="dinosaur-photo-grid" aria-label="Fotografías de dinosaurios">
         {state.round.map((dinosaur) => <PhotoZone key={dinosaur.id} dinosaur={dinosaur} resolved={state.resolvedIds.includes(dinosaur.id)} />)}
