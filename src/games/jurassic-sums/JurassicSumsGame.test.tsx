@@ -111,5 +111,6 @@ describe('JurassicSumsGame', () => {
 
     expect(screen.queryByRole('group', { name: /respuestas/i })).not.toBeInTheDocument()
     expect(screen.getByRole('status')).toHaveTextContent(/suma completada/i)
+    expect(screen.getAllByText(/¡suma completada!/i)).toHaveLength(1)
   })
 })

@@ -87,7 +87,7 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
     </section>
     <section className="sum-answer-area" aria-label="Resolver la suma">
       <p className="sum-equation" aria-label={`Ecuación: ${equation}`}>{equation}</p>
-      <p className="sum-prompt" aria-live="polite">{state.completed ? '¡Suma completada!' : promptFor(state.step)}</p>
+      {!state.completed && <p className="sum-prompt" aria-live="polite">{promptFor(state.step)}</p>}
       <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : correctValue !== null ? '¡Correcto!' : ''}</p>
       {!state.completed && <div className="sum-options" role="group" aria-label="Respuestas posibles">
         {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValue === option ? 'wrong' : ''} ${correctValue === option ? 'correct' : ''}`} disabled={correctValue !== null} onClick={() => answer(option)}>{option}</button>)}
