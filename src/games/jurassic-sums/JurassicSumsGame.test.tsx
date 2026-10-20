@@ -90,22 +90,18 @@ describe('JurassicSumsGame', () => {
     expect(screen.getByRole('status')).toBeEmptyDOMElement()
   })
 
-  it('keeps cracks on incorrect eggs until the correct answer is chosen', () => {
+  it('briefly marks an incorrect egg before allowing another attempt', () => {
     vi.useFakeTimers()
     render(<JurassicSumsGame createRound={createTestRound} />)
 
-    const wrongEggs = screen.getAllByRole('button', { name: /^[1-4]$/ }).filter((egg) => egg.textContent !== '2')
-    fireEvent.click(wrongEggs[0])
-    fireEvent.click(wrongEggs[1])
+    const wrongEgg = screen.getAllByRole('button', { name: /^[1-4]$/ }).find((egg) => egg.textContent !== '2')!
+    fireEvent.click(wrongEgg)
+
+    expect(wrongEgg).toHaveClass('wrong')
+
     act(() => vi.advanceTimersByTime(450))
 
-    expect(wrongEggs[0]).toHaveClass('cracked')
-    expect(wrongEggs[1]).toHaveClass('cracked')
-
-    fireEvent.click(screen.getByRole('button', { name: '2' }))
-
-    expect(wrongEggs[0]).not.toHaveClass('cracked')
-    expect(wrongEggs[1]).not.toHaveClass('cracked')
+    expect(wrongEgg).not.toHaveClass('wrong')
   })
 
   it('exposes each dinosaur as a countable item in both groups', () => {

@@ -37,7 +37,7 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
   const [state, setState] = useState(() => createGameState(makeRound()))
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
-  const [wrongValues, setWrongValues] = useState<number[]>([])
+  const [wrongValue, setWrongValue] = useState<number | null>(null)
   const [correctValue, setCorrectValue] = useState<number | null>(null)
   const feedbackTimer = useRef<number | undefined>(undefined)
   const activeIndex = STEP_INDEX[state.step]
@@ -54,7 +54,7 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
     setState(createGameState(makeRound()))
     setSettings(false)
     setCelebrate(false)
-    setWrongValues([])
+    setWrongValue(null)
     setCorrectValue(null)
   }
 
@@ -63,11 +63,13 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
 
     const result = answerCurrentStep(state, value)
     if (!result.accepted) {
-      setWrongValues((values) => values.includes(value) ? values : [...values, value])
+      setWrongValue(value)
+      if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current)
+      feedbackTimer.current = window.setTimeout(() => setWrongValue(null), 450)
       return
     }
 
-    setWrongValues([])
+    setWrongValue(null)
     setCorrectValue(value)
     feedbackTimer.current = window.setTimeout(() => {
       setState(result.state)
@@ -88,7 +90,7 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
       {!state.completed && <p className="sum-prompt" aria-live="polite">{promptFor(state.step)}</p>}
       <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : correctValue !== null ? '¡Correcto!' : ''}</p>
       {!state.completed && <div className="sum-options" role="group" aria-label="Respuestas posibles">
-        {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValues.includes(option) ? 'wrong cracked' : ''} ${correctValue === option ? 'correct' : ''}`} disabled={correctValue !== null} onClick={() => answer(option)}>{option}</button>)}
+        {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValue === option ? 'wrong' : ''} ${correctValue === option ? 'correct' : ''}`} disabled={correctValue !== null} onClick={() => answer(option)}>{option}</button>)}
       </div>}
     </section>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}
