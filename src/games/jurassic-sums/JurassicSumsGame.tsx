@@ -25,8 +25,8 @@ function promptFor(step: keyof typeof STEP_INDEX) {
   return '¿Cuánto suman?'
 }
 
-function DinosaurGroup({ position, dinosaurs }: { position: 'primer' | 'segundo'; dinosaurs: JurassicSumsRound['leftGroup'] }) {
-  return <section className="sum-dinosaur-group" aria-label={`${position} grupo de dinosaurios`}>
+function DinosaurGroup({ position, dinosaurs, active }: { position: 'primer' | 'segundo'; dinosaurs: JurassicSumsRound['leftGroup']; active: boolean }) {
+  return <section className={`sum-dinosaur-group ${active ? 'active' : ''}`} aria-label={`${position} grupo de dinosaurios`}>
     <ul className="sum-dinosaur-list" aria-label={`${position} grupo de dinosaurios`}>
       {dinosaurs.map((dinosaur, index) => <li key={`${dinosaur.id}-${index}`}><img src={dinosaur.image} alt={`Dinosaurio ${index + 1}: ${dinosaur.name}`} /></li>)}
     </ul>
@@ -81,9 +81,9 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
   return <main className="game-shell jurassic-sums-game">
     <GameHeader title="Sumas jurásicas" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
     <section className="sum-board" aria-label="Suma de dinosaurios">
-      <DinosaurGroup position="primer" dinosaurs={state.round.leftGroup} />
+      <DinosaurGroup position="primer" dinosaurs={state.round.leftGroup} active={state.step === 'left' || state.step === 'total'} />
       <div className="sum-symbols" aria-hidden="true"><span>+</span></div>
-      <DinosaurGroup position="segundo" dinosaurs={state.round.rightGroup} />
+      <DinosaurGroup position="segundo" dinosaurs={state.round.rightGroup} active={state.step === 'right' || state.step === 'total'} />
     </section>
     <section className="sum-answer-area" aria-label="Resolver la suma">
       <p className="sum-equation" aria-label={`Ecuación: ${equation}`}>{equation}</p>

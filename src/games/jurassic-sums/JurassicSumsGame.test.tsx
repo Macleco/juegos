@@ -35,6 +35,24 @@ describe('JurassicSumsGame', () => {
     expect(screen.getByText(/¿cuántos hay en el segundo grupo/i)).toBeInTheDocument()
   })
 
+  it('highlights the group or groups being counted in each step', () => {
+    vi.useFakeTimers()
+    render(<JurassicSumsGame createRound={createTestRound} />)
+
+    const firstGroup = screen.getByRole('region', { name: /primer grupo/i })
+    const secondGroup = screen.getByRole('region', { name: /segundo grupo/i })
+    expect(firstGroup).toHaveClass('active')
+    expect(secondGroup).not.toHaveClass('active')
+
+    answerAndAdvance(2)
+    expect(firstGroup).not.toHaveClass('active')
+    expect(secondGroup).toHaveClass('active')
+
+    answerAndAdvance(3)
+    expect(firstGroup).toHaveClass('active')
+    expect(secondGroup).toHaveClass('active')
+  })
+
   it('keeps confirmed counts in the equation and then asks for the total', () => {
     vi.useFakeTimers()
     render(<JurassicSumsGame createRound={createTestRound} />)
