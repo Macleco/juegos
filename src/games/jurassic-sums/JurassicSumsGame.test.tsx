@@ -53,6 +53,20 @@ describe('JurassicSumsGame', () => {
     expect(secondGroup).toHaveClass('active')
   })
 
+  it('highlights the result only when calculating the total', () => {
+    vi.useFakeTimers()
+    render(<JurassicSumsGame createRound={createTestRound} />)
+
+    const result = screen.getByText('? + ? = ?')
+    expect(result).not.toHaveClass('active')
+
+    answerAndAdvance(2)
+    expect(result).not.toHaveClass('active')
+
+    answerAndAdvance(3)
+    expect(result).toHaveClass('active')
+  })
+
   it('keeps confirmed counts in the equation and then asks for the total', () => {
     vi.useFakeTimers()
     render(<JurassicSumsGame createRound={createTestRound} />)
