@@ -49,13 +49,13 @@ button { cursor: pointer; } .game-shell { min-height: 100vh; padding: 2.1vh 4vw;
 .sum-board { min-height:0; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:clamp(.75rem,2.5vw,3rem); width:min(100%,1500px); margin:0 auto; }
 .sum-dinosaur-group { min-height:0; height:100%; padding:clamp(.75rem,1.6vw,1.5rem); border:6px solid #84d78d; border-radius:42px; background:linear-gradient(135deg,#e5f9d9,#c8f0b8); box-shadow:0 8px 0 #84d78d; }
 .sum-dinosaur-group:last-child { border-color:#8ed1ee; background:linear-gradient(135deg,#e7f6ff,#cceeff); box-shadow:0 8px 0 #8ed1ee; }
-.sum-dinosaur-group.active { outline:7px solid #8a4e00; outline-offset:5px; box-shadow:0 8px 0 #8a4e00; }
+.sum-dinosaur-group.active { outline:none; border-color:#7a5700; background:linear-gradient(135deg,#fff9dd,#f6dc75); box-shadow:0 8px 0 #7a5700; }
 .sum-dinosaur-list { height:100%; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-content:center; gap:clamp(.3rem,.9vw,.9rem); list-style:none; }
 .sum-dinosaur-list li { min-width:0; }
 .sum-dinosaur-group img { width:100%; height:clamp(58px,12vh,145px); padding:.2rem; object-fit:contain; }
 .sum-symbols { display:grid; place-items:center; color:#123d56; font-size:clamp(3rem,7vw,7rem); font-weight:900; line-height:.7; text-align:center; }
 .sum-answer-area { width:min(100%,1160px); margin:0 auto; display:grid; grid-template-columns:auto minmax(230px,1fr); grid-template-areas:"equation prompt" "equation feedback" "equation options"; align-items:center; gap:.45rem 2.5vw; }
-.sum-equation { grid-area:equation; min-width:clamp(260px,27vw,400px); margin:0; padding:.55em .75em; border:5px solid #b9aaee; border-radius:28px; color:#123d56; background:#f0edff; box-shadow:0 7px 0 #cfc6f6; font-size:clamp(2rem,4vw,4rem); font-weight:900; letter-spacing:.04em; text-align:center; white-space:nowrap; }
+.sum-equation { grid-area:equation; min-width:clamp(260px,27vw,400px); margin:0; padding:.55em .75em; border:5px solid #7a5700; border-radius:28px; color:#123d56; background:#fff9dd; box-shadow:0 7px 0 #7a5700; font-size:clamp(2rem,4vw,4rem); font-weight:900; letter-spacing:.04em; text-align:center; white-space:nowrap; }
 .sum-prompt { grid-area:prompt; margin:0; color:#123d56; font-size:clamp(1.15rem,2vw,1.8rem); font-weight:900; text-align:center; }
 .sum-feedback { grid-area:feedback; min-height:1.3em; margin:0; color:#a72835; font-size:clamp(.9rem,1.4vw,1.2rem); font-weight:900; text-align:center; }
 .sum-options { grid-area:options; display:grid; grid-template-columns:repeat(4,minmax(64px,1fr)); gap:clamp(.55rem,1.2vw,1rem); transform:translateY(-1.2vh); }
