@@ -11,6 +11,7 @@ import {
 } from './game-state'
 
 const STEP_INDEX = { left: 0, right: 1, total: 2 } as const
+const CORRECT_FEEDBACK_DURATION = 600
 
 interface JurassicSumsGameProps {
   onHome?: () => void
@@ -37,6 +38,7 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
   const [wrongValue, setWrongValue] = useState<number | null>(null)
+  const [correctValue, setCorrectValue] = useState<number | null>(null)
   const feedbackTimer = useRef<number | undefined>(undefined)
   const activeIndex = STEP_INDEX[state.step]
   const [left, right, total] = state.selected
@@ -53,9 +55,12 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
     setSettings(false)
     setCelebrate(false)
     setWrongValue(null)
+    setCorrectValue(null)
   }
 
   const answer = (value: number) => {
+    if (correctValue !== null) return
+
     const result = answerCurrentStep(state, value)
     if (!result.accepted) {
       setWrongValue(value)
@@ -65,8 +70,12 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
     }
 
     setWrongValue(null)
-    setState(result.state)
-    if (result.state.completed) setCelebrate(true)
+    setCorrectValue(value)
+    feedbackTimer.current = window.setTimeout(() => {
+      setState(result.state)
+      setCorrectValue(null)
+      if (result.state.completed) setCelebrate(true)
+    }, CORRECT_FEEDBACK_DURATION)
   }
 
   return <main className="game-shell jurassic-sums-game">
@@ -79,9 +88,9 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
     <section className="sum-answer-area" aria-label="Resolver la suma">
       <p className="sum-equation" aria-label={`Ecuación: ${equation}`}>{equation}</p>
       <p className="sum-prompt" aria-live="polite">{state.completed ? '¡Suma completada!' : promptFor(state.step)}</p>
-      <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : ''}</p>
+      <p className="sum-feedback" role="status">{state.completed ? '¡Suma completada!' : correctValue !== null ? '¡Correcto!' : ''}</p>
       {!state.completed && <div className="sum-options" role="group" aria-label="Respuestas posibles">
-        {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValue === option ? 'wrong' : ''}`} onClick={() => answer(option)}>{option}</button>)}
+        {state.round.options[activeIndex].map((option) => <button key={option} className={`sum-option egg-option ${wrongValue === option ? 'wrong' : ''} ${correctValue === option ? 'correct' : ''}`} disabled={correctValue !== null} onClick={() => answer(option)}>{option}</button>)}
       </div>}
     </section>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}

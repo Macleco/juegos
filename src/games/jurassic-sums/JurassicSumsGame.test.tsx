@@ -1,18 +1,46 @@
-import { fireEvent, render, screen, within } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { DINOSAURS } from '../../data/dinosaurs'
 import { JurassicSumsGame } from './JurassicSumsGame'
 import { createRoundForCounts } from './game-state'
 
 const createTestRound = () => createRoundForCounts(DINOSAURS, 2, 3)
+const answerAndAdvance = (value: number) => {
+  fireEvent.click(screen.getByRole('button', { name: String(value) }))
+  act(() => vi.advanceTimersByTime(600))
+}
 
 describe('JurassicSumsGame', () => {
-  it('keeps confirmed counts in the equation and then asks for the total', () => {
+  afterEach(() => vi.useRealTimers())
+
+  it('marks the correct egg before advancing to the next group', () => {
+    vi.useFakeTimers()
     render(<JurassicSumsGame createRound={createTestRound} />)
 
-    fireEvent.click(screen.getByRole('button', { name: '2' }))
-    fireEvent.click(screen.getByRole('button', { name: '3' }))
+    const correctEgg = screen.getByRole('button', { name: '2' })
+    fireEvent.click(correctEgg)
+
+    expect(correctEgg).toHaveClass('correct')
+    screen.getAllByRole('button', { name: /^[1-4]$/ }).forEach((button) => expect(button).toBeDisabled())
+    expect(screen.getByText(/¿cuántos hay en el primer grupo/i)).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent(/¡correcto!/i)
+
+    act(() => vi.advanceTimersByTime(599))
+
+    expect(screen.getByText(/¿cuántos hay en el primer grupo/i)).toBeInTheDocument()
+
+    act(() => vi.advanceTimersByTime(1))
+
+    expect(screen.getByText(/¿cuántos hay en el segundo grupo/i)).toBeInTheDocument()
+  })
+
+  it('keeps confirmed counts in the equation and then asks for the total', () => {
+    vi.useFakeTimers()
+    render(<JurassicSumsGame createRound={createTestRound} />)
+
+    answerAndAdvance(2)
+    answerAndAdvance(3)
 
     expect(screen.getByText('2 + 3 = ?')).toBeInTheDocument()
     expect(screen.getByText(/¿cuánto suman/i)).toBeInTheDocument()
@@ -46,9 +74,10 @@ describe('JurassicSumsGame', () => {
   })
 
   it('restarts from the first counting step and closes the celebration', () => {
+    vi.useFakeTimers()
     render(<JurassicSumsGame createRound={createTestRound} />)
 
-    ;[2, 3, 5].forEach((value) => fireEvent.click(screen.getByRole('button', { name: String(value) })))
+    ;[2, 3, 5].forEach(answerAndAdvance)
     fireEvent.click(screen.getByRole('button', { name: /jugar otra vez/i }))
 
     expect(screen.getByText(/¿cuántos hay en el primer grupo/i)).toBeInTheDocument()
@@ -56,9 +85,10 @@ describe('JurassicSumsGame', () => {
   })
 
   it('does not offer more answers after closing the completion dialog', () => {
+    vi.useFakeTimers()
     render(<JurassicSumsGame createRound={createTestRound} />)
 
-    ;[2, 3, 5].forEach((value) => fireEvent.click(screen.getByRole('button', { name: String(value) })))
+    ;[2, 3, 5].forEach(answerAndAdvance)
     fireEvent.click(screen.getByRole('button', { name: /cerrar/i }))
 
     expect(screen.queryByRole('group', { name: /respuestas/i })).not.toBeInTheDocument()
