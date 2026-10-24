@@ -52,7 +52,7 @@ button { cursor: pointer; } .game-shell { min-height: 100vh; padding: 2.1vh 4vw;
 .sum-dinosaur-group.active { outline:none; border-color:#7a5700; background:linear-gradient(135deg,#fff9dd,#f6dc75); box-shadow:0 8px 0 #7a5700; }
 .sum-dinosaur-list { height:100%; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); align-content:center; gap:clamp(.3rem,.9vw,.9rem); list-style:none; }
 .sum-dinosaur-list li { min-width:0; }
-.sum-dinosaur-group img { width:100%; height:clamp(66px,14vh,165px); padding:.2rem; object-fit:contain; }
+.sum-dinosaur-group img { width:100%; height:clamp(74px,16vh,180px); padding:.2rem; object-fit:contain; }
 .sum-symbols { display:grid; place-items:center; color:#123d56; font-size:clamp(3rem,7vw,7rem); font-weight:900; line-height:.7; text-align:center; }
 .sum-answer-area { width:min(100%,1160px); margin:0 auto; display:grid; grid-template-columns:auto minmax(230px,1fr); grid-template-areas:"equation prompt" "equation feedback" "equation options"; align-items:center; gap:.45rem 2.5vw; }
 .sum-equation { grid-area:equation; min-width:clamp(260px,27vw,400px); margin:0; padding:.55em .75em; border:5px solid #b9aaee; border-radius:28px; color:#123d56; background:#f0edff; box-shadow:0 7px 0 #cfc6f6; font-size:clamp(2rem,4vw,4rem); font-weight:900; letter-spacing:.04em; text-align:center; white-space:nowrap; }
@@ -66,7 +66,7 @@ button { cursor: pointer; } .game-shell { min-height: 100vh; padding: 2.1vh 4vw;
 .sum-option:focus-visible { outline:4px solid #7064b4; outline-offset:4px; }
 .sum-option.wrong { border-color:#f0807b; background:#ffe1dc; box-shadow:0 6px 0 #f0aaa3; animation:shake .45s; }
 .sum-option.correct { border-color:#4caf62; color:#124a25; background:radial-gradient(ellipse at 34% 18%,#ffffff 0 8%,transparent 26%),linear-gradient(145deg,#ecffe7,#9fe39e); box-shadow:inset 0 5px 0 #ffffff,0 7px 0 #4caf62,0 10px 16px #2f7d3228; }
-@media(max-width:800px){.jurassic-sums-game{overflow:auto;grid-template-rows:auto auto auto}.sum-board{grid-template-columns:1fr;gap:1rem}.sum-symbols{font-size:3rem}.sum-answer-area{grid-template-columns:1fr;grid-template-areas:"equation" "prompt" "feedback" "options";padding-bottom:1rem}.sum-equation{justify-self:center}.sum-dinosaur-group{min-height:220px}.sum-dinosaur-group img{height:90px}}
+@media(max-width:800px){.jurassic-sums-game{overflow:auto;grid-template-rows:auto auto auto}.sum-board{grid-template-columns:1fr;gap:1rem}.sum-symbols{font-size:3rem}.sum-answer-area{grid-template-columns:1fr;grid-template-areas:"equation" "prompt" "feedback" "options";padding-bottom:1rem}.sum-equation{justify-self:center}.sum-dinosaur-group{min-height:220px}.sum-dinosaur-group img{height:100px}}
 @media(max-height:800px) and (min-width:801px){.sum-dinosaur-group{border-width:4px;border-radius:30px}.sum-dinosaur-group img{height:clamp(44px,9vh,90px)}.sum-option{min-height:64px}.sum-answer-area{transform:scale(.9);transform-origin:center bottom}}
 
 .theme-menu-card { grid-template-rows:minmax(0,1fr) auto; gap:.75rem; }
