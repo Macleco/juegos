@@ -29,4 +29,14 @@ describe('classroom UI primitives', () => {
     render(<Modal title="¡Muy bien!" onClose={vi.fn()}>Contenido</Modal>)
     expect(screen.getByRole('dialog', { name: /muy bien/i })).toBeInTheDocument()
   })
+
+  it('keeps the message and action in a separate, spaced dialog content area', () => {
+    const styles = readFileSync(resolve(process.cwd(), 'src/styles/index.css'), 'utf8')
+
+    render(<Modal title="🎉 ¡MUY BIEN! 🎉" onClose={vi.fn()}><p>¡Has ganado!</p><button>Jugar otra vez</button></Modal>)
+
+    expect(screen.getByRole('heading', { name: /¡muy bien!/i })).toHaveTextContent('¡MUY BIEN!')
+    expect(screen.getByText('¡Has ganado!').parentElement).toHaveClass('modal-content')
+    expect(styles).toMatch(/\.modal-content\s*\{[^}]*gap\s*:/)
+  })
 })

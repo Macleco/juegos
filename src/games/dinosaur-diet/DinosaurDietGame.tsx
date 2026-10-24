@@ -38,6 +38,6 @@ export function DinosaurDietGame({ onHome = () => {}, onDinosaurGames = () => {}
       </div>
     </DndContext>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}
-    {celebrate && <Modal title="🎉 ¡Muy bien! 🎉" onClose={() => setCelebrate(false)}><p>¡Has clasificado todos los dinosaurios!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
+    {celebrate && <Modal title="🎉 ¡MUY BIEN! 🎉" onClose={() => setCelebrate(false)}><p>¡Has clasificado todos los dinosaurios!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
   </main>
 }

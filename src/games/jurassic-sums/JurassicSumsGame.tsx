@@ -94,6 +94,6 @@ export function JurassicSumsGame({ onHome = () => {}, onDinosaurGames = () => {}
       </div>}
     </section>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}
-    {celebrate && <Modal title="🎉 ¡Muy bien! 🎉" onClose={() => setCelebrate(false)}><p>¡Has contado los dinosaurios y resuelto la suma!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
+    {celebrate && <Modal title="🎉 ¡MUY BIEN! 🎉" onClose={() => setCelebrate(false)}><p>¡Has contado los dinosaurios y resuelto la suma!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
   </main>
 }

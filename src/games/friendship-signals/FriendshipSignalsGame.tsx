@@ -41,6 +41,6 @@ export function FriendshipSignalsGame({ onHome = () => {} }: { onHome?: () => vo
       <div className="game-bottom"><aside className="drag-instruction" aria-label="Instrucciones de juego"><Pointer aria-hidden="true" /><span>ARRASTRA<br />LA TARJETA</span></aside><section className="deck" aria-label="Mazo de situaciones"><div className="card-back back-one"/><div className="card-back back-two"/>{current && <div className={`deck-card ${wrong ? 'wrong' : ''}`}><Card situation={current} active /></div>}</section><ProgressIndicator current={total - state.deck.length} total={total} label="situaciones clasificadas" /></div>
     </DndContext>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}
-    {celebrate && <Modal title="🎉 ¡Muy bien! 🎉" onClose={() => setCelebrate(false)}><p>¡Has clasificado todas las situaciones!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
+    {celebrate && <Modal title="🎉 ¡MUY BIEN! 🎉" onClose={() => setCelebrate(false)}><p>¡Has clasificado todas las situaciones!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
   </main>
 }
