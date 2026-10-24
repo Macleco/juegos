@@ -4,12 +4,12 @@ import { DINOSAURS } from '../../data/dinosaurs'
 import { createGameState, createRound, hideUnmatchedCards, selectCard } from './game-state'
 
 describe('jurassic memory game rules', () => {
-  it('creates six dinosaur pairs shuffled into twelve cards', () => {
+  it('creates five dinosaur pairs shuffled into ten cards', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.999)
     const round = createRound(DINOSAURS)
 
-    expect(round).toHaveLength(12)
-    expect(new Set(round.map((card) => card.dinosaur.id))).toHaveLength(6)
+    expect(round).toHaveLength(10)
+    expect(new Set(round.map((card) => card.dinosaur.id))).toHaveLength(5)
     expect(round.reduce<Record<string, number>>((counts, card) => ({ ...counts, [card.dinosaur.id]: (counts[card.dinosaur.id] ?? 0) + 1 }), {})).toEqual(
       expect.objectContaining(Object.fromEntries([...new Set(round.map((card) => card.dinosaur.id))].map((id) => [id, 2]))),
     )

@@ -15,19 +15,17 @@ const round: readonly MemoryCard[] = [
   { id: 'ankylosaurus-2', dinosaur: { id: 'ankylosaurus', name: 'Ankylosaurus', diet: 'herbivore', image: 'dinos/ankylosaurus.png' } },
   { id: 'parasaurolophus-1', dinosaur: { id: 'parasaurolophus', name: 'Parasaurolophus', diet: 'herbivore', image: 'dinos/parasaurolophus.png' } },
   { id: 'parasaurolophus-2', dinosaur: { id: 'parasaurolophus', name: 'Parasaurolophus', diet: 'herbivore', image: 'dinos/parasaurolophus.png' } },
-  { id: 'velociraptor-1', dinosaur: { id: 'velociraptor', name: 'Velociraptor', diet: 'carnivore', image: 'dinos/velociraptor.png' } },
-  { id: 'velociraptor-2', dinosaur: { id: 'velociraptor', name: 'Velociraptor', diet: 'carnivore', image: 'dinos/velociraptor.png' } },
 ]
 
 describe('JurassicMemoryGame', () => {
   afterEach(() => { vi.useRealTimers() })
 
-  it('shows twelve face-down cards in a 3 by 4 memory grid', () => {
+  it('shows ten face-down cards in a 2 by 5 memory grid', () => {
     render(<JurassicMemoryGame createRound={() => round} />)
 
     expect(screen.getByLabelText('Cartas de Memory Jurásico')).toHaveClass('memory-card-grid')
-    expect(screen.getAllByRole('button', { name: /carta boca abajo/i })).toHaveLength(12)
-    expect(screen.getAllByTestId('memory-card-back')).toHaveLength(12)
+    expect(screen.getAllByRole('button', { name: /carta boca abajo/i })).toHaveLength(10)
+    expect(screen.getAllByTestId('memory-card-back')).toHaveLength(10)
     expect(screen.getAllByTestId('memory-card-back')[0]).toHaveAttribute('src', 'reverso_memory.png')
   })
 
@@ -40,7 +38,7 @@ describe('JurassicMemoryGame', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Carta boca abajo 3' }))
     expect(screen.getAllByText('TRICERATOPS')).toHaveLength(2)
-    expect(screen.getByText('1 / 6 parejas')).toBeInTheDocument()
+    expect(screen.getByText('1 / 5 parejas')).toBeInTheDocument()
   })
 
   it('hides an incorrect pair after a brief pause', () => {
@@ -53,6 +51,6 @@ describe('JurassicMemoryGame', () => {
 
     act(() => vi.advanceTimersByTime(900))
     expect(screen.queryByText('TRICERATOPS')).not.toBeInTheDocument()
-    expect(screen.getAllByRole('button', { name: /carta boca abajo/i })).toHaveLength(12)
+    expect(screen.getAllByRole('button', { name: /carta boca abajo/i })).toHaveLength(10)
   })
 })

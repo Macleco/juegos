@@ -30,10 +30,10 @@ function shuffle<T>(items: readonly T[]): T[] {
 
 export function createRound(dinosaurs: readonly Dinosaur[]): MemoryCard[] {
   const uniqueDinosaurs = dinosaurs.filter((dinosaur, index) => dinosaurs.findIndex(({ id }) => id === dinosaur.id) === index)
-  if (uniqueDinosaurs.length < 6) throw new Error('Memory Jurásico necesita al menos seis dinosaurios distintos')
+  if (uniqueDinosaurs.length < 5) throw new Error('Memory Jurásico necesita al menos cinco dinosaurios distintos')
 
   return shuffle(uniqueDinosaurs)
-    .slice(0, 6)
+    .slice(0, 5)
     .flatMap((dinosaur) => [1, 2].map((copy) => ({ id: `${dinosaur.id}-${copy}`, dinosaur })))
     .sort(() => Math.random() - 0.5)
 }
