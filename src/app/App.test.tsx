@@ -38,6 +38,7 @@ describe('App', () => {
     expect(gameLogos[1]).toHaveAttribute('src', 'logo_juego_nombres.png')
     expect(gameLogos[2]).toHaveAttribute('src', 'logo_sumas.png')
     expect(screen.getByRole('button', { name: /memory jurásico/i })).toBeInTheDocument()
+    expect(gameLogos[3]).toHaveAttribute('src', 'logo_memory.png')
 
     fireEvent.click(screen.getByRole('button', { name: /qué comía cada dinosaurio/i }))
 

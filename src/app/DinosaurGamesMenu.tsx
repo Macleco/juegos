@@ -37,7 +37,7 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           </span>
         </button>
         <button className="game-menu-card dinosaur-game-card" onClick={onStartJurassicMemory}>
-          <img src="logo_dinosaurios_no_texto.png" alt="" />
+          <img src="logo_memory.png" alt="" />
           <span>
             <strong>Memory Jurásico</strong>
             <small>Encuentra las parejas de dinosaurios.</small>
