@@ -79,6 +79,7 @@ button { cursor: pointer; } .game-shell { min-height: 100vh; padding: 2.1vh 4vw;
 .memory-progress { background:#e4f7d9; }
 .memory-card-grid { width:min(100%,1180px); height:100%; min-height:0; margin:0 auto; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); grid-template-rows:repeat(3,minmax(0,1fr)); gap:clamp(.65rem,1.35vw,1.25rem); }
 .memory-card { min-width:0; min-height:0; padding:0; overflow:hidden; border:5px solid #75bfe3; border-radius:26px; color:#123d56; background:#cdeaff; box-shadow:0 6px 0 #75bfe3; transition:transform .18s,filter .18s,background .18s; touch-action:manipulation; }
+.memory-card:not(.face-up) { border:0; border-radius:0; background:transparent; box-shadow:none; }
 .memory-card:not(:disabled):hover,.memory-card:not(:disabled):focus-visible { transform:translateY(-3px); filter:brightness(1.03); }
 .memory-card:focus-visible { outline:4px solid #7064b4; outline-offset:4px; }
 .memory-card-back { width:100%; height:100%; display:block; object-fit:cover; }
