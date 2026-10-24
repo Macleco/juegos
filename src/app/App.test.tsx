@@ -37,6 +37,7 @@ describe('App', () => {
     expect(gameLogos[0]).toHaveAttribute('src', 'logo_herbivoros.png')
     expect(gameLogos[1]).toHaveAttribute('src', 'logo_juego_nombres.png')
     expect(gameLogos[2]).toHaveAttribute('src', 'logo_sumas.png')
+    expect(screen.getByRole('button', { name: /memory jurásico/i })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: /qué comía cada dinosaurio/i }))
 
@@ -79,10 +80,21 @@ describe('App', () => {
     expect(window.location.hash).toBe('')
   })
 
+  it('opens Memory Jurásico from the dinosaur menu', () => {
+    render(<App />)
+
+    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
+    fireEvent.click(screen.getByRole('button', { name: /memory jurásico/i }))
+
+    expect(screen.getByRole('heading', { name: /memory jurásico/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/jurassic-memory')
+  })
+
   it.each([
     ['¿Qué comía cada dinosaurio?', '#/dinosaur-diet'],
     ['¿Cómo se llama el dinosaurio?', '#/dinosaur-name'],
     ['Sumas jurásicas', '#/jurassic-sums'],
+    ['Memory Jurásico', '#/jurassic-memory'],
   ])('returns from %s to the dinosaur game category', (gameName, expectedHash) => {
     render(<App />)
 

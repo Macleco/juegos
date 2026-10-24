@@ -3,9 +3,10 @@ interface DinosaurGamesMenuProps {
   onStartDinosaurDiet: () => void
   onStartDinosaurName: () => void
   onStartJurassicSums: () => void
+  onStartJurassicMemory: () => void
 }
 
-export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums }: DinosaurGamesMenuProps) {
+export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory }: DinosaurGamesMenuProps) {
   return (
     <main className="game-menu dinosaur-games-menu">
       <header className="game-menu-header">
@@ -33,6 +34,13 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           <span>
             <strong>Sumas jurásicas</strong>
             <small>Cuenta los dinosaurios y resuelve la suma.</small>
+          </span>
+        </button>
+        <button className="game-menu-card dinosaur-game-card" onClick={onStartJurassicMemory}>
+          <img src="logo_dinosaurios_no_texto.png" alt="" />
+          <span>
+            <strong>Memory Jurásico</strong>
+            <small>Encuentra las parejas de dinosaurios.</small>
           </span>
         </button>
       </section>
