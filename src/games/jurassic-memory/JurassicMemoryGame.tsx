@@ -54,7 +54,7 @@ export function JurassicMemoryGame({ onHome = () => {}, onDinosaurGames = () => 
           const visible = state.faceUpIds.includes(card.id) || state.matchedIds.includes(card.id)
           const matched = state.matchedIds.includes(card.id)
           return <button key={card.id} className={`memory-card ${visible ? 'face-up' : ''} ${matched ? 'matched' : ''}`} onClick={() => chooseCard(card.id)} disabled={matched} aria-label={visible ? card.dinosaur.name : `Carta boca abajo ${index + 1}`}>
-            {visible ? <span className="memory-card-front"><img src={card.dinosaur.image} alt={card.dinosaur.name} /><strong>{card.dinosaur.name.toUpperCase()}</strong></span> : <span className="memory-card-back" aria-hidden="true">🦕</span>}
+            {visible ? <span className="memory-card-front"><img src={card.dinosaur.image} alt={card.dinosaur.name} /><strong>{card.dinosaur.name.toUpperCase()}</strong></span> : <img className="memory-card-back" data-testid="memory-card-back" src="reverso_memory.png" alt="" />}
           </button>
         })}
       </div>

@@ -27,6 +27,8 @@ describe('JurassicMemoryGame', () => {
 
     expect(screen.getByLabelText('Cartas de Memory Jurásico')).toHaveClass('memory-card-grid')
     expect(screen.getAllByRole('button', { name: /carta boca abajo/i })).toHaveLength(12)
+    expect(screen.getAllByTestId('memory-card-back')).toHaveLength(12)
+    expect(screen.getAllByTestId('memory-card-back')[0]).toHaveAttribute('src', 'reverso_memory.png')
   })
 
   it('shows a dinosaur image and name after touching a card, then keeps a correct pair visible', () => {
