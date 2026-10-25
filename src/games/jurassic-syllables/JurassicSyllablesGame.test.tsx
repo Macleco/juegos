@@ -8,7 +8,7 @@ describe('JurassicSyllablesGame', () => {
     render(<JurassicSyllablesGame />)
 
     const activeCard = screen.getByTestId('active-syllable-card')
-    expect(within(activeCard).getByRole('img')).toHaveAttribute('src', expect.stringMatching(/^imagenes_dino_silabas\/.+\.jpg$/))
+    expect(within(activeCard).getByRole('img')).toHaveAttribute('src', expect.stringMatching(/^imagenes_dino_silabas\/.+-enfocad[oa]s?\.png$/))
     expect(screen.getByRole('region', { name: '2 sílabas' })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: '3 sílabas' })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: '4 sílabas' })).toBeInTheDocument()

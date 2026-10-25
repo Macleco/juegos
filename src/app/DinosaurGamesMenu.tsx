@@ -45,7 +45,7 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           </span>
         </button>
         <button className="game-menu-card dinosaur-game-card" onClick={onStartJurassicSyllables}>
-          <img src="imagenes_dino_silabas/dinosaurio.jpg" alt="" />
+          <img src="imagenes_dino_silabas/dinosaurio-enfocado.png" alt="" />
           <span>
             <strong>Sílabas jurásicas</strong>
             <small>Clasifica las palabras según sus sílabas.</small>
