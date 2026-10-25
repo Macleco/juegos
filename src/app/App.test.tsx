@@ -40,7 +40,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /memory jurásico/i })).toBeInTheDocument()
     expect(gameLogos[3]).toHaveAttribute('src', 'logo_memory.png')
     expect(screen.getByRole('button', { name: /sílabas jurásicas/i })).toBeInTheDocument()
-    expect(gameLogos[4]).toHaveAttribute('src', 'imagenes_dino_silabas/dinosaurio-enfocado.png')
+    expect(gameLogos[4]).toHaveAttribute('src', 'logo_silabas.png')
 
     fireEvent.click(screen.getByRole('button', { name: /qué comía cada dinosaurio/i }))
 
