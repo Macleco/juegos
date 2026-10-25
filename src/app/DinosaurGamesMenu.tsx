@@ -4,9 +4,10 @@ interface DinosaurGamesMenuProps {
   onStartDinosaurName: () => void
   onStartJurassicSums: () => void
   onStartJurassicMemory: () => void
+  onStartJurassicSyllables: () => void
 }
 
-export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory }: DinosaurGamesMenuProps) {
+export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables }: DinosaurGamesMenuProps) {
   return (
     <main className="game-menu dinosaur-games-menu">
       <header className="game-menu-header">
@@ -41,6 +42,13 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           <span>
             <strong>Memory Jurásico</strong>
             <small>Encuentra las parejas de dinosaurios.</small>
+          </span>
+        </button>
+        <button className="game-menu-card dinosaur-game-card" onClick={onStartJurassicSyllables}>
+          <img src="imagenes_dino_silabas/dinosaurio.jpg" alt="" />
+          <span>
+            <strong>Sílabas jurásicas</strong>
+            <small>Clasifica las palabras según sus sílabas.</small>
           </span>
         </button>
       </section>
