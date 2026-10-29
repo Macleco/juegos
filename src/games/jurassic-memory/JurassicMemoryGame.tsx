@@ -5,7 +5,7 @@ import { Modal } from '../../components/Modal'
 import { DINOSAURS } from '../../data/dinosaurs'
 import { createGameState, createRound, hideUnmatchedCards, selectCard, type MemoryCard } from './game-state'
 
-const MISMATCH_DURATION = 850
+const MISMATCH_DURATION = 1_200
 
 interface JurassicMemoryGameProps {
   onHome?: () => void

@@ -41,7 +41,7 @@ describe('JurassicMemoryGame', () => {
     expect(screen.getByText('1 / 5 parejas')).toBeInTheDocument()
   })
 
-  it('hides an incorrect pair after a brief pause', () => {
+  it('keeps an incorrect pair visible for a little longer before hiding it', () => {
     vi.useFakeTimers()
     render(<JurassicMemoryGame createRound={() => round} />)
 
@@ -49,7 +49,11 @@ describe('JurassicMemoryGame', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Carta boca abajo 2' }))
     expect(screen.getByText('DIPLODOCUS')).toBeInTheDocument()
 
-    act(() => vi.advanceTimersByTime(900))
+    act(() => vi.advanceTimersByTime(1_100))
+    expect(screen.getByText('TRICERATOPS')).toBeInTheDocument()
+    expect(screen.getByText('DIPLODOCUS')).toBeInTheDocument()
+
+    act(() => vi.advanceTimersByTime(100))
     expect(screen.queryByText('TRICERATOPS')).not.toBeInTheDocument()
     expect(screen.getAllByRole('button', { name: /carta boca abajo/i })).toHaveLength(10)
   })
