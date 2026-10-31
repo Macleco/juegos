@@ -33,6 +33,8 @@ describe('JurassicLostLettersGame', () => {
     render(<JurassicLostLettersGame createRound={() => puzzles} />)
     fireEvent.click(screen.getByRole('button', { name: puzzles[0].answer }))
     expect(screen.getByRole('status')).toHaveTextContent(/¡correcto!/i)
+    expect(screen.getByLabelText('Nombre completo: TRICERATOPS')).toBeInTheDocument()
+    expect(screen.getByLabelText('Nombre completo: TRICERATOPS').querySelector('.revealed-letter')).toHaveTextContent(puzzles[0].answer)
     act(() => vi.advanceTimersByTime(1_999))
     expect(screen.getByRole('img', { name: 'Triceratops' })).toBeInTheDocument()
     act(() => vi.advanceTimersByTime(1))
