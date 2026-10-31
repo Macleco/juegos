@@ -5,7 +5,7 @@ import { Modal } from '../../components/Modal'
 import { DINOSAURS } from '../../data/dinosaurs'
 import { answerCurrentLetter, createGameState, createRound, maskedName, type LostLetterPuzzle } from './game-state'
 
-const CORRECT_FEEDBACK_DURATION = 600
+const CORRECT_FEEDBACK_DURATION = 2_000
 
 interface JurassicLostLettersGameProps { onHome?: () => void; onDinosaurGames?: () => void; createRound?: () => readonly LostLetterPuzzle[] }
 
