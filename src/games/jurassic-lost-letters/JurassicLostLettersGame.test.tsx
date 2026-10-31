@@ -20,7 +20,7 @@ describe('JurassicLostLettersGame', () => {
   it('marks a wrong letter briefly and stays on the same word', () => {
     vi.useFakeTimers()
     render(<JurassicLostLettersGame createRound={() => puzzles} />)
-    const wrong = puzzles[0].options.find((letter) => letter !== puzzles[0].answer)!
+    const wrong = puzzles[0].options[0].find((letter) => letter !== puzzles[0].answers[0])!
     const button = screen.getByRole('button', { name: wrong })
     fireEvent.click(button)
     expect(button).toHaveClass('wrong'); expect(screen.getByLabelText('Nombre incompleto: T_ICERATOPS')).toBeInTheDocument()
@@ -31,16 +31,27 @@ describe('JurassicLostLettersGame', () => {
   it('advances after a correct letter and celebrates the completed round', () => {
     vi.useFakeTimers()
     render(<JurassicLostLettersGame createRound={() => puzzles} />)
-    fireEvent.click(screen.getByRole('button', { name: puzzles[0].answer }))
+    fireEvent.click(screen.getByRole('button', { name: puzzles[0].answers[0] }))
     expect(screen.getByRole('status')).toHaveTextContent(/¡correcto!/i)
     expect(screen.getByLabelText('Nombre completo: TRICERATOPS')).toBeInTheDocument()
-    expect(screen.getByLabelText('Nombre completo: TRICERATOPS').querySelector('.revealed-letter')).toHaveTextContent(puzzles[0].answer)
+    expect(screen.getByLabelText('Nombre completo: TRICERATOPS').querySelector('.revealed-letter')).toHaveTextContent(puzzles[0].answers[0])
     act(() => vi.advanceTimersByTime(1_999))
     expect(screen.getByRole('img', { name: 'Triceratops' })).toBeInTheDocument()
     act(() => vi.advanceTimersByTime(1))
     expect(screen.getByRole('img', { name: 'Diplodocus' })).toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: puzzles[1].answer }))
+    fireEvent.click(screen.getByRole('button', { name: puzzles[1].answers[0] }))
     act(() => vi.advanceTimersByTime(2_000))
     expect(screen.getByText(/¡muy bien!/i)).toBeInTheDocument()
+  })
+
+  it('starts a new round with the selected difficulty', () => {
+    const createRound = vi.fn(() => puzzles)
+    render(<JurassicLostLettersGame createRound={createRound} />)
+
+    fireEvent.click(screen.getByRole('button', { name: /configuración/i }))
+    fireEvent.click(screen.getByRole('button', { name: /medio/i }))
+
+    expect(createRound).toHaveBeenLastCalledWith('medium')
+    expect(screen.queryByRole('dialog', { name: /configuración/i })).not.toBeInTheDocument()
   })
 })

@@ -3,19 +3,22 @@ import { DINOSAURS } from '../../data/dinosaurs'
 import { answerCurrentLetter, createGameState, createPuzzle, createRound, maskedName } from './game-state'
 
 describe('jurassic lost letters game rules', () => {
-  it('creates a puzzle with one missing letter and three distinct choices', () => {
+  it('creates an easy puzzle with one missing letter and three distinct choices', () => {
     const puzzle = createPuzzle(DINOSAURS[0], 1)
-    expect(maskedName(puzzle)).toBe('T_ICERATOPS'); expect(puzzle.answer).toBe('R'); expect(puzzle.options).toHaveLength(3); expect(new Set(puzzle.options)).toHaveLength(3); expect(puzzle.options).toContain('R')
+    expect(maskedName(puzzle)).toBe('T_ICERATOPS'); expect(puzzle.answers).toEqual(['R']); expect(puzzle.options[0]).toHaveLength(3); expect(new Set(puzzle.options[0])).toHaveLength(3); expect(puzzle.options[0]).toContain('R')
   })
-  it('uses existing dinosaur names and only hides letters', () => {
-    const round = createRound(DINOSAURS)
-    expect(round).toHaveLength(5)
-    round.forEach((puzzle) => { expect(DINOSAURS).toContain(puzzle.dinosaur); expect(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(puzzle.dinosaur.name[puzzle.missingIndex])).toBe(true) })
+  it('hides half the letters on medium and all letters on hard', () => {
+    const mediumRound = createRound(DINOSAURS, 'medium')
+    mediumRound.forEach((puzzle) => {
+      const letterCount = [...puzzle.dinosaur.name].filter((letter) => /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(letter)).length
+      expect(puzzle.missingIndexes).toHaveLength(Math.ceil(letterCount / 2))
+    })
+    expect(createRound(DINOSAURS, 'hard').every((puzzle) => maskedName(puzzle) === puzzle.dinosaur.name.toLocaleUpperCase('es-ES').replace(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/g, '_'))).toBe(true)
   })
-  it('advances only after the correct letter and completes the final puzzle', () => {
-    const first = createPuzzle(DINOSAURS[0], 0); const second = createPuzzle(DINOSAURS[1], 0); const state = createGameState([first, second])
+  it('reveals missing letters one at a time before advancing to the next word', () => {
+    const first = createPuzzle(DINOSAURS[0], [0, 1]); const second = createPuzzle(DINOSAURS[1], 0); const state = createGameState([first, second])
     expect(answerCurrentLetter(state, 'Z')).toEqual({ accepted: false, state })
-    const afterFirst = answerCurrentLetter(state, first.answer); const afterSecond = answerCurrentLetter(afterFirst.state, second.answer)
-    expect(afterFirst).toMatchObject({ accepted: true, state: { currentIndex: 1, completed: false } }); expect(afterSecond).toMatchObject({ accepted: true, state: { currentIndex: 2, completed: true } })
+    const afterFirstLetter = answerCurrentLetter(state, first.answers[0]); const afterWord = answerCurrentLetter(afterFirstLetter.state, first.answers[1]); const afterRound = answerCurrentLetter(afterWord.state, second.answers[0])
+    expect(afterFirstLetter).toMatchObject({ accepted: true, state: { currentIndex: 0, revealedCount: 1, completed: false } }); expect(afterWord).toMatchObject({ accepted: true, state: { currentIndex: 1, revealedCount: 0, completed: false } }); expect(afterRound).toMatchObject({ accepted: true, state: { completed: true } })
   })
 })
