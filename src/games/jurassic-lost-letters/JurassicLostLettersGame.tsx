@@ -67,7 +67,7 @@ export function JurassicLostLettersGame({ onHome = () => {}, onDinosaurGames = (
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Elige el nivel de dificultad.</p><div className="difficulty-options" role="group" aria-label="Nivel de dificultad">
       <button className={difficulty === 'easy' ? 'selected' : ''} aria-pressed={difficulty === 'easy'} onClick={() => restart('easy')}><strong>Fácil</strong><small>Falta una letra.</small></button>
       <button className={difficulty === 'medium' ? 'selected' : ''} aria-pressed={difficulty === 'medium'} onClick={() => restart('medium')}><strong>Medio</strong><small>Falta la mitad de las letras.</small></button>
-      <button className={difficulty === 'hard' ? 'selected' : ''} aria-pressed={difficulty === 'hard'} onClick={() => restart('hard')}><strong>Difícil</strong><small>Faltan todas las letras.</small></button>
+      <button className={difficulty === 'hard' ? 'selected' : ''} aria-pressed={difficulty === 'hard'} onClick={() => restart('hard')}><strong>Difícil</strong><small>Falta el 80% de las letras.</small></button>
     </div></Modal>}
     {celebrate && <Modal title="🎉 ¡MUY BIEN! 🎉" onClose={() => setCelebrate(false)}><p>¡Has completado todas las palabras jurásicas!</p><button className="primary-button" onClick={() => restart()}>Jugar otra vez</button></Modal>}
   </main>

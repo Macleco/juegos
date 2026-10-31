@@ -49,7 +49,7 @@ export function createPuzzle(dinosaur: Dinosaur, indexes: number | readonly numb
 
 function missingIndexesFor(name: string, difficulty: Difficulty): number[] {
   const indexes = letterIndexes(name)
-  const count = difficulty === 'easy' ? 1 : difficulty === 'medium' ? Math.ceil(indexes.length / 2) : indexes.length
+  const count = difficulty === 'easy' ? 1 : difficulty === 'medium' ? Math.ceil(indexes.length / 2) : Math.ceil(indexes.length * 0.8)
   return shuffle(indexes).slice(0, count).sort((left, right) => left - right)
 }
 

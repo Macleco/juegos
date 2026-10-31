@@ -7,13 +7,16 @@ describe('jurassic lost letters game rules', () => {
     const puzzle = createPuzzle(DINOSAURS[0], 1)
     expect(maskedName(puzzle)).toBe('T_ICERATOPS'); expect(puzzle.answers).toEqual(['R']); expect(puzzle.options[0]).toHaveLength(3); expect(new Set(puzzle.options[0])).toHaveLength(3); expect(puzzle.options[0]).toContain('R')
   })
-  it('hides half the letters on medium and all letters on hard', () => {
+  it('hides half the letters on medium and 80% on hard', () => {
     const mediumRound = createRound(DINOSAURS, 'medium')
     mediumRound.forEach((puzzle) => {
       const letterCount = [...puzzle.dinosaur.name].filter((letter) => /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(letter)).length
       expect(puzzle.missingIndexes).toHaveLength(Math.ceil(letterCount / 2))
     })
-    expect(createRound(DINOSAURS, 'hard').every((puzzle) => maskedName(puzzle) === puzzle.dinosaur.name.toLocaleUpperCase('es-ES').replace(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/g, '_'))).toBe(true)
+    createRound(DINOSAURS, 'hard').forEach((puzzle) => {
+      const letterCount = [...puzzle.dinosaur.name].filter((letter) => /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(letter)).length
+      expect(puzzle.missingIndexes).toHaveLength(Math.ceil(letterCount * 0.8))
+    })
   })
   it('reveals missing letters one at a time before advancing to the next word', () => {
     const first = createPuzzle(DINOSAURS[0], [0, 1]); const second = createPuzzle(DINOSAURS[1], 0); const state = createGameState([first, second])
