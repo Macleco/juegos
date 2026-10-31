@@ -20,8 +20,8 @@ function LostLettersWord({ puzzle, revealedCount, showNextAnswer }: { puzzle: Lo
 }
 
 export function JurassicLostLettersGame({ onHome = () => {}, onDinosaurGames = () => {}, createRound: makeRound = (difficulty) => createRound(DINOSAURS, difficulty) }: JurassicLostLettersGameProps) {
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy')
-  const [state, setState] = useState(() => createGameState(makeRound('easy')))
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium')
+  const [state, setState] = useState(() => createGameState(makeRound('medium')))
   const [settings, setSettings] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
   const [wrongLetter, setWrongLetter] = useState<string | null>(null)
