@@ -43,7 +43,7 @@ export function createPuzzle(dinosaur: Dinosaur, missingIndex: number): LostLett
 
 export function createRound(dinosaurs: readonly Dinosaur[], count = 5): LostLetterPuzzle[] {
   const uniqueDinosaurs = dinosaurs.filter((dinosaur, index) => dinosaurs.findIndex(({ id }) => id === dinosaur.id) === index)
-  if (uniqueDinosaurs.length === 0) throw new Error('Letras perdidas del Jurásico necesita al menos un dinosaurio')
+  if (uniqueDinosaurs.length === 0) throw new Error('Letras jurásicas necesita al menos un dinosaurio')
   return shuffle(uniqueDinosaurs).slice(0, Math.min(count, uniqueDinosaurs.length)).map((dinosaur) => {
     const indexes = letterIndexes(dinosaur.name)
     return createPuzzle(dinosaur, indexes[Math.floor(Math.random() * indexes.length)])
