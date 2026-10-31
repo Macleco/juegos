@@ -53,7 +53,7 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           </span>
         </button>
         <button className="game-menu-card dinosaur-game-card" onClick={onStartJurassicLostLetters}>
-          <img src="dinos/stegosaurus.png" alt="" />
+          <img src="logo_letras_jurasicas.png" alt="" />
           <span>
             <strong>Letras jurásicas</strong>
             <small>Completa el nombre de cada dinosaurio.</small>

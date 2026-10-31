@@ -42,7 +42,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: /sílabas jurásicas/i })).toBeInTheDocument()
     expect(gameLogos[4]).toHaveAttribute('src', 'logo_silabas.png')
     expect(screen.getByRole('button', { name: /letras jurásicas/i })).toBeInTheDocument()
-    expect(gameLogos[5]).toHaveAttribute('src', 'dinos/stegosaurus.png')
+    expect(gameLogos[5]).toHaveAttribute('src', 'logo_letras_jurasicas.png')
 
     fireEvent.click(screen.getByRole('button', { name: /qué comía cada dinosaurio/i }))
 
