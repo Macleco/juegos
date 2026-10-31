@@ -5,6 +5,7 @@ import { JurassicSumsGame } from '../games/jurassic-sums/JurassicSumsGame'
 import { JurassicMemoryGame } from '../games/jurassic-memory/JurassicMemoryGame'
 import { FriendshipSignalsGame } from '../games/friendship-signals/FriendshipSignalsGame'
 import { JurassicSyllablesGame } from '../games/jurassic-syllables/JurassicSyllablesGame'
+import { JurassicLostLettersGame } from '../games/jurassic-lost-letters/JurassicLostLettersGame'
 import { DinosaurGamesMenu } from './DinosaurGamesMenu'
 import { GameMenu } from './GameMenu'
 
@@ -15,6 +16,7 @@ const JURASSIC_MEMORY_HASH = '#/jurassic-memory'
 const DINOSAUR_GAMES_HASH = '#/dinosaur-games'
 const FRIENDSHIP_SIGNALS_HASH = '#/friendship-signals'
 const JURASSIC_SYLLABLES_HASH = '#/jurassic-syllables'
+const JURASSIC_LOST_LETTERS_HASH = '#/jurassic-lost-letters'
 
 function currentRoute() {
   return window.location.hash
@@ -57,6 +59,10 @@ export function App() {
     window.location.hash = JURASSIC_SYLLABLES_HASH
     setRoute(JURASSIC_SYLLABLES_HASH)
   }
+  const openJurassicLostLetters = () => {
+    window.location.hash = JURASSIC_LOST_LETTERS_HASH
+    setRoute(JURASSIC_LOST_LETTERS_HASH)
+  }
   const returnToMenu = () => {
     window.location.hash = ''
     setRoute('')
@@ -67,8 +73,9 @@ export function App() {
   if (route === DINOSAUR_SUMS_HASH) return <JurassicSumsGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
   if (route === JURASSIC_MEMORY_HASH) return <JurassicMemoryGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
   if (route === JURASSIC_SYLLABLES_HASH) return <JurassicSyllablesGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
+  if (route === JURASSIC_LOST_LETTERS_HASH) return <JurassicLostLettersGame onHome={returnToMenu} onDinosaurGames={openDinosaurGames} />
   if (route === DINOSAUR_GAMES_HASH) {
-    return <DinosaurGamesMenu onBack={returnToMenu} onStartDinosaurDiet={openDinosaurDiet} onStartDinosaurName={openDinosaurName} onStartJurassicSums={openJurassicSums} onStartJurassicMemory={openJurassicMemory} onStartJurassicSyllables={openJurassicSyllables} />
+    return <DinosaurGamesMenu onBack={returnToMenu} onStartDinosaurDiet={openDinosaurDiet} onStartDinosaurName={openDinosaurName} onStartJurassicSums={openJurassicSums} onStartJurassicMemory={openJurassicMemory} onStartJurassicSyllables={openJurassicSyllables} onStartJurassicLostLetters={openJurassicLostLetters} />
   }
   if (route === FRIENDSHIP_SIGNALS_HASH) return <FriendshipSignalsGame onHome={returnToMenu} />
   return <GameMenu onOpenDinosaurGames={openDinosaurGames} onStartFriendshipSignals={openFriendshipSignals} />
