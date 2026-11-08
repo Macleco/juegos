@@ -63,7 +63,7 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
         <button className="game-menu-card dinosaur-game-card math-eggs-menu-card" onClick={onStartMathEggs}>
           <span className="math-eggs-menu-icon" aria-hidden="true"><i className="math-egg egg-blue" /><i className="math-egg egg-green" /><i className="math-egg egg-pink" /></span>
           <span>
-            <strong>Huevos matemáticos</strong>
+            <strong>Huevos prehistóricos</strong>
             <small>Cuenta los huevos de cada color.</small>
           </span>
         </button>

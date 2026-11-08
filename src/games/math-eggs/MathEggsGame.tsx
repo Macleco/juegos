@@ -72,7 +72,7 @@ export function MathEggsGame({ onHome = () => {}, onDinosaurGames = () => {}, cr
 
   const activeColor = state.color
   return <main className="game-shell math-eggs-game">
-    <GameHeader title="Huevos matemáticos" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
+    <GameHeader title="Huevos prehistóricos" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
     <section className="math-eggs-board" aria-label="Huevos para contar">
       <ul className="math-egg-grid" aria-label="Huevos para contar">
         {state.round.eggs.map((egg) => <li key={egg.id} className={`math-egg egg-${egg.color}`} aria-label={`Huevo ${EGG_LABELS[egg.color]}`} />)}
