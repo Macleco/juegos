@@ -113,6 +113,15 @@ describe('App', () => {
     expect(window.location.hash).toBe('#/jurassic-lost-letters')
   })
 
+  it('opens Huevos matemáticos from the dinosaur menu', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
+    fireEvent.click(screen.getByRole('button', { name: /huevos matemáticos/i }))
+
+    expect(screen.getByRole('heading', { name: /huevos matemáticos/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/math-eggs')
+  })
+
   it.each([
     ['¿Qué comía cada dinosaurio?', '#/dinosaur-diet'],
     ['¿Cómo se llama el dinosaurio?', '#/dinosaur-name'],
@@ -120,6 +129,7 @@ describe('App', () => {
     ['Memory Jurásico', '#/jurassic-memory'],
     ['Sílabas jurásicas', '#/jurassic-syllables'],
     ['Letras jurásicas', '#/jurassic-lost-letters'],
+    ['Huevos matemáticos', '#/math-eggs'],
   ])('returns from %s to the dinosaur game category', (gameName, expectedHash) => {
     render(<App />)
 
