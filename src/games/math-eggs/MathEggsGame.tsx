@@ -91,7 +91,13 @@ export function MathEggsGame({ onHome = () => {}, onDinosaurGames = () => {}, cr
         </div>}
       </div>
       <ol className="math-eggs-progress" aria-label="Colores por contar">
-        {EGG_COLORS.map((color) => <li key={color} className={state.selected[color] === null ? '' : 'done'}><span className={`math-egg progress-egg egg-${color}`} aria-hidden="true" /> <span className="sr-only">Huevos {COLOR_LABELS[color]}</span></li>)}
+        {EGG_COLORS.map((color) => {
+          const selectedCount = state.selected[color]
+          return <li key={color} className={selectedCount === null ? '' : 'done'}>
+            <span className={`math-egg progress-egg egg-${color}`} aria-hidden="true">{selectedCount ?? ''}</span>
+            <span className="sr-only">Huevos {COLOR_LABELS[color]}{selectedCount === null ? '' : `: ${selectedCount}`}</span>
+          </li>
+        })}
       </ol>
     </section>
     {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}

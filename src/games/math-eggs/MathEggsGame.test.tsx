@@ -31,6 +31,7 @@ describe('MathEggsGame', () => {
     act(() => vi.advanceTimersByTime(600))
 
     expect(screen.getByText(/¿cuántos huevos verdes hay/i)).toBeInTheDocument()
+    expect(screen.getByText('4', { selector: '.progress-egg' })).toBeInTheDocument()
   })
 
   it('keeps the current color after an incorrect answer', () => {
