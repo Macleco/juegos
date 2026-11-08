@@ -4,15 +4,16 @@ import { DINOSAURS } from '../../data/dinosaurs'
 import { createGameState, createRound, placeDinosaur } from './game-state'
 
 describe('jurassic series game rules', () => {
-  it('creates three five-position repeating series', () => {
+  it('creates three different series patterns, with repetitions when appropriate', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.999)
     const round = createRound(DINOSAURS)
 
     expect(round).toHaveLength(3)
+    expect(new Set(round.map((series) => series.patternType)).size).toBe(3)
     round.forEach((series) => {
       expect(series.pattern).toHaveLength(4)
-      expect(series.pattern[0].id).toBe(series.pattern[3].id)
-      expect(series.answer.id).toBe(series.pattern[1].id)
+      expect(new Set(series.pattern.map((dinosaur) => dinosaur.id)).size).toBeLessThan(4)
+      expect(series.pattern).toContainEqual(series.answer)
     })
   })
 

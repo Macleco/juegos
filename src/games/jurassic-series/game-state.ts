@@ -2,6 +2,7 @@ import type { Dinosaur } from '../../data/dinosaurs'
 
 export interface JurassicSeries {
   id: string
+  patternType: string
   pattern: readonly [Dinosaur, Dinosaur, Dinosaur, Dinosaur]
   answer: Dinosaur
 }
@@ -27,18 +28,36 @@ function shuffle<T>(items: readonly T[]): T[] {
   return result
 }
 
+interface SeriesTemplate {
+  id: string
+  visiblePositions: readonly [number, number, number, number]
+  answerPosition: number
+}
+
+const SERIES_TEMPLATES: readonly SeriesTemplate[] = [
+  { id: 'alternating', visiblePositions: [0, 1, 0, 1], answerPosition: 0 },
+  { id: 'pairs', visiblePositions: [0, 0, 1, 1], answerPosition: 0 },
+  { id: 'palindrome', visiblePositions: [0, 1, 2, 1], answerPosition: 0 },
+  { id: 'sandwich', visiblePositions: [0, 1, 1, 0], answerPosition: 1 },
+  { id: 'triple', visiblePositions: [0, 0, 0, 1], answerPosition: 0 },
+]
+
 export function createRound(dinosaurs: readonly Dinosaur[]): readonly JurassicSeries[] {
   if (dinosaurs.length < 9) throw new Error('At least nine dinosaurs are required')
 
-  return shuffle(dinosaurs).slice(0, 9).reduce<JurassicSeries[]>((series, _dinosaur, index, selected) => {
-    if (index % 3 !== 0) return series
-    const [first, second, third] = selected.slice(index, index + 3)
-    return [...series, {
-      id: `series-${series.length + 1}`,
-      pattern: [first, second, third, first],
-      answer: second,
-    }]
-  }, [])
+  const selectedDinosaurs = shuffle(dinosaurs).slice(0, 9)
+  const templates = shuffle(SERIES_TEMPLATES).slice(0, 3)
+
+  return templates.map((template, index) => {
+    const dinosaursForSeries = selectedDinosaurs.slice(index * 3, index * 3 + 3)
+    const pattern = template.visiblePositions.map((position) => dinosaursForSeries[position]) as [Dinosaur, Dinosaur, Dinosaur, Dinosaur]
+    return {
+      id: `series-${index + 1}`,
+      patternType: template.id,
+      pattern,
+      answer: dinosaursForSeries[template.answerPosition],
+    }
+  })
 }
 
 export function createGameState(round: readonly JurassicSeries[]): JurassicSeriesState {
