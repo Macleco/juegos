@@ -5,11 +5,12 @@ import { answerCurrentColor, createGameState, createRound, createRoundForCounts 
 describe('math eggs game rules', () => {
   it('creates a balanced mixed collection and three answer choices for every color', () => {
     Array.from({ length: 20 }, createRound).forEach((round) => {
-      expect(round.eggs).toHaveLength(round.counts.blue + round.counts.green + round.counts.pink)
+      expect(round.eggs).toHaveLength(round.colors.reduce((total, color) => total + round.counts[color], 0))
       expect(round.eggs).toHaveLength(24)
-      expect(new Set(round.eggs.map((egg) => egg.color))).toEqual(new Set(['blue', 'green', 'pink']))
+      expect(round.colors).toHaveLength(3)
+      expect(new Set(round.eggs.map((egg) => egg.color))).toEqual(new Set(round.colors))
 
-      ;(['blue', 'green', 'pink'] as const).forEach((color) => {
+      round.colors.forEach((color) => {
         expect(round.counts[color]).toBeGreaterThanOrEqual(5)
         expect(round.counts[color]).toBeLessThanOrEqual(11)
         expect(round.options[color]).toHaveLength(3)

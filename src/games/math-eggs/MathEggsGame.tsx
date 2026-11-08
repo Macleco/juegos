@@ -6,7 +6,6 @@ import {
   answerCurrentColor,
   createGameState,
   createRound,
-  EGG_COLORS,
   type EggColor,
   type MathEggsRound,
 } from './game-state'
@@ -15,11 +14,17 @@ const COLOR_LABELS: Record<EggColor, string> = {
   blue: 'azules',
   green: 'verdes',
   pink: 'rosas',
+  purple: 'morados',
+  yellow: 'amarillos',
+  orange: 'naranjas',
 }
 const EGG_LABELS: Record<EggColor, string> = {
   blue: 'azul',
   green: 'verde',
   pink: 'rosa',
+  purple: 'morado',
+  yellow: 'amarillo',
+  orange: 'naranja',
 }
 const CORRECT_FEEDBACK_DURATION = 600
 
@@ -91,7 +96,7 @@ export function MathEggsGame({ onHome = () => {}, onDinosaurGames = () => {}, cr
         </div>}
       </div>
       <ol className="math-eggs-progress" aria-label="Colores por contar">
-        {EGG_COLORS.map((color) => {
+        {state.round.colors.map((color) => {
           const selectedCount = state.selected[color]
           return <li key={color} className={selectedCount === null ? '' : 'done'}>
             <span className={`math-egg progress-egg egg-${color}`} aria-hidden="true">{selectedCount ?? ''}</span>
