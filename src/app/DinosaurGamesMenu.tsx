@@ -69,7 +69,7 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           </span>
         </button>
         <button className="game-menu-card dinosaur-game-card series-menu-card" onClick={onStartJurassicSeries}>
-          <span className="series-menu-symbols" aria-hidden="true">🦕 🦖 ?</span>
+          <img src="logo_series_jurasicas.png" alt="" />
           <span>
             <strong>Series jurásicas</strong>
             <small>Descubre qué dinosaurio viene después.</small>
