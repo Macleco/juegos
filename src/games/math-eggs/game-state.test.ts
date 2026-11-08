@@ -3,18 +3,19 @@ import { describe, expect, it } from 'vitest'
 import { answerCurrentColor, createGameState, createRound, createRoundForCounts } from './game-state'
 
 describe('math eggs game rules', () => {
-  it('creates a mixed collection and three answer choices for every color', () => {
-    const round = createRound()
+  it('creates a balanced mixed collection and three answer choices for every color', () => {
+    Array.from({ length: 20 }, createRound).forEach((round) => {
+      expect(round.eggs).toHaveLength(round.counts.blue + round.counts.green + round.counts.pink)
+      expect(round.eggs).toHaveLength(24)
+      expect(new Set(round.eggs.map((egg) => egg.color))).toEqual(new Set(['blue', 'green', 'pink']))
 
-    expect(round.eggs).toHaveLength(round.counts.blue + round.counts.green + round.counts.pink)
-    expect(round.eggs).toHaveLength(24)
-    expect(new Set(round.eggs.map((egg) => egg.color))).toEqual(new Set(['blue', 'green', 'pink']))
-
-    ;(['blue', 'green', 'pink'] as const).forEach((color) => {
-      expect(round.counts[color]).toBeGreaterThanOrEqual(1)
-      expect(round.options[color]).toHaveLength(3)
-      expect(new Set(round.options[color])).toHaveLength(3)
-      expect(round.options[color]).toContain(round.counts[color])
+      ;(['blue', 'green', 'pink'] as const).forEach((color) => {
+        expect(round.counts[color]).toBeGreaterThanOrEqual(5)
+        expect(round.counts[color]).toBeLessThanOrEqual(11)
+        expect(round.options[color]).toHaveLength(3)
+        expect(new Set(round.options[color])).toHaveLength(3)
+        expect(round.options[color]).toContain(round.counts[color])
+      })
     })
   })
 

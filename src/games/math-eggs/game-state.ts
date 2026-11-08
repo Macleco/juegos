@@ -63,16 +63,16 @@ export function createRoundForCounts(counts: Record<EggColor, number>): MathEggs
 }
 
 export function createRound(): MathEggsRound {
-  const firstDivider = Math.floor(Math.random() * 23) + 1
-  let secondDivider = Math.floor(Math.random() * 23) + 1
-  while (secondDivider === firstDivider) secondDivider = Math.floor(Math.random() * 23) + 1
-  const [first, second] = [firstDivider, secondDivider].sort((left, right) => left - right)
+  const balancedCounts: Array<Record<EggColor, number>> = []
+  for (let blue = 5; blue <= 11; blue += 1) {
+    for (let green = 5; green <= 11; green += 1) {
+      const pink = 24 - blue - green
+      if (pink >= 5 && pink <= 11) balancedCounts.push({ blue, green, pink })
+    }
+  }
+  const counts = balancedCounts[Math.floor(Math.random() * balancedCounts.length)]
 
-  return createRoundForCounts({
-    blue: first,
-    green: second - first,
-    pink: 24 - second,
-  })
+  return createRoundForCounts(counts)
 }
 
 export function createGameState(round: MathEggsRound): MathEggsState {
