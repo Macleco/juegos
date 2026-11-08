@@ -63,15 +63,15 @@ export function createRoundForCounts(counts: Record<EggColor, number>): MathEggs
 }
 
 export function createRound(): MathEggsRound {
-  let blue = 10
-  let green = 10
-  let pink = 10
+  let blue = 8
+  let green = 8
+  let pink = 8
 
   do {
-    blue = Math.floor(Math.random() * 5) + 8
-    green = Math.floor(Math.random() * 5) + 8
-    pink = 30 - blue - green
-  } while (pink < 8 || pink > 12)
+    blue = Math.floor(Math.random() * 4) + 6
+    green = Math.floor(Math.random() * 4) + 6
+    pink = 24 - blue - green
+  } while (pink < 6 || pink > 9)
 
   return createRoundForCounts({ blue, green, pink })
 }

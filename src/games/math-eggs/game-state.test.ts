@@ -7,7 +7,7 @@ describe('math eggs game rules', () => {
     const round = createRound()
 
     expect(round.eggs).toHaveLength(round.counts.blue + round.counts.green + round.counts.pink)
-    expect(round.eggs).toHaveLength(30)
+    expect(round.eggs).toHaveLength(24)
     expect(new Set(round.eggs.map((egg) => egg.color))).toEqual(new Set(['blue', 'green', 'pink']))
 
     ;(['blue', 'green', 'pink'] as const).forEach((color) => {
