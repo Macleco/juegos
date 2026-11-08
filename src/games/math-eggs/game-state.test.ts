@@ -11,6 +11,7 @@ describe('math eggs game rules', () => {
     expect(new Set(round.eggs.map((egg) => egg.color))).toEqual(new Set(['blue', 'green', 'pink']))
 
     ;(['blue', 'green', 'pink'] as const).forEach((color) => {
+      expect(round.counts[color]).toBeGreaterThanOrEqual(1)
       expect(round.options[color]).toHaveLength(3)
       expect(new Set(round.options[color])).toHaveLength(3)
       expect(round.options[color]).toContain(round.counts[color])

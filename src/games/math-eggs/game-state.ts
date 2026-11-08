@@ -41,8 +41,8 @@ function createOptions(answer: number): number[] {
 
 export function createRoundForCounts(counts: Record<EggColor, number>): MathEggsRound {
   EGG_COLORS.forEach((color) => {
-    if (!Number.isInteger(counts[color]) || counts[color] < 3 || counts[color] > 12) {
-      throw new Error('Each egg color must have between three and twelve eggs')
+    if (!Number.isInteger(counts[color]) || counts[color] < 1 || counts[color] > 22) {
+      throw new Error('Each egg color must have between one and twenty-two eggs')
     }
   })
 
@@ -63,17 +63,16 @@ export function createRoundForCounts(counts: Record<EggColor, number>): MathEggs
 }
 
 export function createRound(): MathEggsRound {
-  let blue = 8
-  let green = 8
-  let pink = 8
+  const firstDivider = Math.floor(Math.random() * 23) + 1
+  let secondDivider = Math.floor(Math.random() * 23) + 1
+  while (secondDivider === firstDivider) secondDivider = Math.floor(Math.random() * 23) + 1
+  const [first, second] = [firstDivider, secondDivider].sort((left, right) => left - right)
 
-  do {
-    blue = Math.floor(Math.random() * 4) + 6
-    green = Math.floor(Math.random() * 4) + 6
-    pink = 24 - blue - green
-  } while (pink < 6 || pink > 9)
-
-  return createRoundForCounts({ blue, green, pink })
+  return createRoundForCounts({
+    blue: first,
+    green: second - first,
+    pink: 24 - second,
+  })
 }
 
 export function createGameState(round: MathEggsRound): MathEggsState {
