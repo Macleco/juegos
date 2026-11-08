@@ -61,7 +61,7 @@ export function JurassicSeriesGame({ onHome = () => {}, onDinosaurGames = () => 
     if (result.state.completed) window.setTimeout(() => setCelebrate(true), 350)
   }
 
-  const availableAnswers = state.round.filter((_, index) => state.placed[index] === null).map((series) => series.answer)
+  const availableAnswers = state.answerOrder.map((dinosaurId) => state.round.find((series) => series.answer.id === dinosaurId)?.answer).filter((dinosaur): dinosaur is Dinosaur => dinosaur !== undefined)
 
   return <main className="game-shell jurassic-series-game">
     <GameHeader title="Series jurásicas" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />

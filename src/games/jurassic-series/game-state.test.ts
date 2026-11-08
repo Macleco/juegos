@@ -24,6 +24,15 @@ describe('jurassic series game rules', () => {
     expect(accepted).toMatchObject({ accepted: true, state: { placed: [round[0].answer.id, null, null], completed: false } })
   })
 
+  it('shuffles the available answers independently from the series order', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0)
+    const round = createRound(DINOSAURS)
+    const state = createGameState(round)
+
+    expect(state.answerOrder).toEqual([...round.map((series) => series.answer.id).slice(1), round[0].answer.id])
+    expect(new Set(state.answerOrder)).toEqual(new Set(round.map((series) => series.answer.id)))
+  })
+
   it('keeps the state unchanged after an incorrect dinosaur', () => {
     const round = createRound(DINOSAURS)
     const state = createGameState(round)

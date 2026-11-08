@@ -9,6 +9,7 @@ export interface JurassicSeries {
 export interface JurassicSeriesState {
   round: readonly JurassicSeries[]
   placed: readonly (string | null)[]
+  answerOrder: readonly string[]
   completed: boolean
 }
 
@@ -41,7 +42,12 @@ export function createRound(dinosaurs: readonly Dinosaur[]): readonly JurassicSe
 }
 
 export function createGameState(round: readonly JurassicSeries[]): JurassicSeriesState {
-  return { round, placed: round.map(() => null), completed: false }
+  return {
+    round,
+    placed: round.map(() => null),
+    answerOrder: shuffle(round.map((series) => series.answer.id)),
+    completed: false,
+  }
 }
 
 export function placeDinosaur(state: JurassicSeriesState, seriesId: string, dinosaurId: string): PlaceDinosaurResult {
@@ -50,5 +56,13 @@ export function placeDinosaur(state: JurassicSeriesState, seriesId: string, dino
   if (!series || state.placed[seriesIndex] !== null || series.answer.id !== dinosaurId) return { accepted: false, state }
 
   const placed = state.placed.map((item, index) => index === seriesIndex ? dinosaurId : item)
-  return { accepted: true, state: { ...state, placed, completed: placed.every(Boolean) } }
+  return {
+    accepted: true,
+    state: {
+      ...state,
+      placed,
+      answerOrder: state.answerOrder.filter((id) => id !== dinosaurId),
+      completed: placed.every(Boolean),
+    },
+  }
 }
