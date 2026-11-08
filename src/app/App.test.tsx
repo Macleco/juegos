@@ -45,6 +45,7 @@ describe('App', () => {
     expect(gameLogos[5]).toHaveAttribute('src', 'logo_letras_jurasicas.png')
     expect(screen.getByRole('button', { name: /huevos prehistóricos/i })).toBeInTheDocument()
     expect(gameLogos[6]).toHaveAttribute('src', 'logo_huevos_jurasicos.png')
+    expect(screen.getByRole('button', { name: /series jurásicas/i })).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: /qué comía cada dinosaurio/i }))
 
@@ -124,6 +125,15 @@ describe('App', () => {
     expect(window.location.hash).toBe('#/math-eggs')
   })
 
+  it('opens Series jurásicas from the dinosaur menu', () => {
+    render(<App />)
+    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
+    fireEvent.click(screen.getByRole('button', { name: /series jurásicas/i }))
+
+    expect(screen.getByRole('heading', { name: /series jurásicas/i })).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/jurassic-series')
+  })
+
   it.each([
     ['¿Qué comía cada dinosaurio?', '#/dinosaur-diet'],
     ['¿Cómo se llama el dinosaurio?', '#/dinosaur-name'],
@@ -132,6 +142,7 @@ describe('App', () => {
     ['Sílabas jurásicas', '#/jurassic-syllables'],
     ['Letras jurásicas', '#/jurassic-lost-letters'],
     ['Huevos prehistóricos', '#/math-eggs'],
+    ['Series jurásicas', '#/jurassic-series'],
   ])('returns from %s to the dinosaur game category', (gameName, expectedHash) => {
     render(<App />)
 

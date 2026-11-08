@@ -7,9 +7,10 @@ interface DinosaurGamesMenuProps {
   onStartJurassicSyllables: () => void
   onStartJurassicLostLetters: () => void
   onStartMathEggs: () => void
+  onStartJurassicSeries: () => void
 }
 
-export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables, onStartJurassicLostLetters, onStartMathEggs }: DinosaurGamesMenuProps) {
+export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables, onStartJurassicLostLetters, onStartMathEggs, onStartJurassicSeries }: DinosaurGamesMenuProps) {
   return (
     <main className="game-menu dinosaur-games-menu">
       <header className="game-menu-header">
@@ -65,6 +66,13 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           <span>
             <strong>Huevos prehistóricos</strong>
             <small>Cuenta los huevos de cada color.</small>
+          </span>
+        </button>
+        <button className="game-menu-card dinosaur-game-card series-menu-card" onClick={onStartJurassicSeries}>
+          <span className="series-menu-symbols" aria-hidden="true">🦕 🦖 ?</span>
+          <span>
+            <strong>Series jurásicas</strong>
+            <small>Descubre qué dinosaurio viene después.</small>
           </span>
         </button>
       </section>
