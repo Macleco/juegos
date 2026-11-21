@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-21T18:37:00+01:00",
+  "title": "Design System: Marta Game",
+  "extensions": {
+    "colorMeta": {
+      "slate-blue": { "role": "primary", "displayName": "Azul pizarra", "canonical": "#123d56", "tonalRamp": ["#102f43", "#123d56", "#195879", "#2d7398", "#5b9fc2", "#8fc9e1", "#c9e9f4", "#eef9fc"] },
+      "classroom-cream": { "role": "neutral", "displayName": "Crema de aula", "canonical": "#fff9ed", "tonalRamp": ["#514b42", "#756f64", "#a7a092", "#d3ccbd", "#eee7d9", "#fff0d8", "#fff9ed", "#fffdf8"] },
+      "game-sky": { "role": "primary", "displayName": "Cielo de juego", "canonical": "#8ed1ee", "tonalRamp": ["#164557", "#21657e", "#348ca9", "#58b2d1", "#8ed1ee", "#b9e4f5", "#d9f2fb", "#f2fbfe"] },
+      "success-green": { "role": "secondary", "displayName": "Verde acierto", "canonical": "#75cf85", "tonalRamp": ["#173f28", "#176446", "#31825a", "#55a96c", "#75cf85", "#a5e6ae", "#dff8d1", "#f4fdf0"] },
+      "action-lilac": { "role": "secondary", "displayName": "Lila de acción", "canonical": "#7064b4", "tonalRamp": ["#312b5b", "#4d4384", "#7064b4", "#9587d3", "#b9aaee", "#d8d0fa", "#f0edff", "#faf9ff"] },
+      "correction-coral": { "role": "tertiary", "displayName": "Coral de corrección", "canonical": "#f0807b", "tonalRamp": ["#642c31", "#a04449", "#c95e61", "#f0807b", "#f5aaa1", "#ffd0c9", "#ffe1dc", "#fff6f4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Título de actividad", "purpose": "Identifica la actividad actual con lectura a distancia." },
+      "title": { "displayName": "Título de zona", "purpose": "Nombra categorías, consignas y destinos de juego." },
+      "body": { "displayName": "Instrucción clara", "purpose": "Explica acciones breves a alumnado y adultos acompañantes." },
+      "label": { "displayName": "Etiqueta de pieza", "purpose": "Nombra opciones y cartas de juego con alta visibilidad." }
+    },
+    "shadows": [
+      { "name": "card-soft", "value": "0 8px 18px #34405422", "purpose": "Separa tarjetas independientes del tablero." },
+      { "name": "sticker-step", "value": "0 8px 0 currentColor", "purpose": "Crea elevación corta para opciones y paneles." },
+      { "name": "modal-overlay", "value": "0 18px 50px #34405455", "purpose": "Eleva diálogos y celebraciones sobre la actividad." }
+    ],
+    "motion": [
+      { "name": "hover-lift", "value": "transform .18s–.2s, filter .18s–.2s", "purpose": "Confirma interactividad elevando o ajustando brillo." },
+      { "name": "wrong-shake", "value": "shake .42s–.45s", "purpose": "Señala una respuesta incorrecta de manera breve." },
+      { "name": "reduced-motion", "value": "animation-duration: .01ms; transition-duration: .01ms", "purpose": "Respeta preferencias de reducción de movimiento." }
+    ],
+    "breakpoints": [
+      { "name": "tablet", "value": "800px" },
+      { "name": "compact-mobile", "value": "620px" },
+      { "name": "short-desktop", "value": "800px height" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón de acción principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción explícita para continuar, confirmar o repetir.",
+      "html": "<button class=\"ds-btn-primary\">CONTINUAR</button>",
+      "css": ".ds-btn-primary { border: 0; border-radius: 18px; padding: .95rem 1.5rem; color: #fff; background: #7064b4; font: 900 1.05rem Nunito, ui-rounded, system-ui, sans-serif; cursor: pointer; transition: transform .18s, filter .18s, background .2s; } .ds-btn-primary:hover { background: #6e60c3; transform: translateY(-3px); } .ds-btn-primary:focus-visible { outline: 4px solid #7064b4; outline-offset: 4px; } .ds-btn-primary:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Botón de icono",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "Navegación o acción de cabecera con objetivo táctil amplio.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"Inicio\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z\"/></svg></button>",
+      "css": ".ds-icon-button { width: 62px; height: 62px; display: grid; place-items: center; border: 0; border-radius: 50%; color: #123d56; background: #cdeaff; box-shadow: inset 0 -4px #8ed1ee; cursor: pointer; transition: filter .2s, transform .18s; } .ds-icon-button svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linejoin: round; } .ds-icon-button:hover { filter: brightness(.96); transform: translateY(-2px); } .ds-icon-button:focus-visible { outline: 4px solid #7064b4; outline-offset: 4px; }"
+    },
+    {
+      "name": "Tarjeta de respuesta",
+      "kind": "card",
+      "refersTo": "answer-card",
+      "description": "Pieza de juego clara para una imagen y una etiqueta o respuesta.",
+      "html": "<article class=\"ds-answer-card\"><strong>TRICERATOPS</strong></article>",
+      "css": ".ds-answer-card { min-height: 130px; display: grid; place-items: center; padding: .65rem; border: 3px solid #fffdf8; border-radius: 26px; color: #123d56; background: #fffdf8; box-shadow: 0 8px 18px #34405422; font: 900 1rem Nunito, ui-rounded, system-ui, sans-serif; text-align: center; }"
+    },
+    {
+      "name": "Zona de clasificación",
+      "kind": "custom",
+      "refersTo": "zone-success",
+      "description": "Destino grande para soltar y agrupar tarjetas por categoría.",
+      "html": "<section class=\"ds-zone\"><h2>HERBÍVOROS</h2><p>Suelta aquí</p></section>",
+      "css": ".ds-zone { min-height: 220px; padding: 2.1vh 2.4vw; border: 6px solid #84d78d; border-radius: 42px; color: #176446; background: linear-gradient(120deg, #dff8d1, #c8f0b8); text-align: center; transition: transform .2s, filter .2s; } .ds-zone h2 { width: fit-content; margin: 0 auto 1vh; padding: .25em .8em; border-radius: 999px; background: #fffdf8; font: 900 1.35rem Nunito, ui-rounded, system-ui, sans-serif; } .ds-zone p { margin: 0; font: 700 1rem Nunito, ui-rounded, system-ui, sans-serif; } .ds-zone:hover { transform: scale(1.02); filter: brightness(.96); }"
+    },
+    {
+      "name": "Indicador de progreso",
+      "kind": "chip",
+      "refersTo": "zone-success",
+      "description": "Contador de avance que acompaña sin competir con el ejercicio.",
+      "html": "<p class=\"ds-progress\"><strong>3 / 6</strong><span aria-hidden=\"true\"> ● ● ● ○ ○ ○</span></p>",
+      "css": ".ds-progress { display: inline-flex; gap: .55rem; align-items: center; padding: 1rem 1.25rem; border: 4px solid #a7dcfa; border-radius: 34px; color: #123d56; background: #e5f5ff; font: 900 1.1rem Nunito, ui-rounded, system-ui, sans-serif; } .ds-progress span { color: #75cf85; letter-spacing: .12em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Pizarra de exploración amable",
+    "overview": "Marta Game convierte la pizarra digital en un espacio de exploración sereno, claro y alegre. La interfaz está construida para alumnado de 5 y 6 años acompañado por profesorado o familias: cada acción debe leerse rápido, sentirse manipulable y tener una respuesta visual inequívoca.\n\nEl sistema combina fondos crema luminosos, zonas pastel por significado y un azul pizarra profundo que mantiene la legibilidad. Las tarjetas, paneles y controles tienen esquinas generosas, bordes definidos y una elevación corta que los hace parecer piezas que se pueden tocar y mover.",
+    "keyCharacteristics": ["Alegre y táctil, sin saturar la pizarra.", "Muy legible a distancia, con jerarquía basada en tamaño y contraste.", "Semántica de color consistente para aciertos, errores, acciones y categorías.", "Componentes elevados como pegatinas o piezas de juego."],
+    "rules": [
+      { "name": "The Meaningful Pastel Rule", "body": "Los colores pastel deben tener una función de estado, categoría o jerarquía; el Azul pizarra permanece disponible para todo texto e icono que requiera contraste.", "section": "colors" },
+      { "name": "The Read-From-Away Rule", "body": "Las instrucciones y objetivos deben poder comprenderse desde una pizarra: texto breve, peso alto y tamaños fluidos; no usar texto diminuto como única explicación.", "section": "typography" },
+      { "name": "The Touchable Layer Rule", "body": "Si un elemento se arrastra, se pulsa o se elige, debe mantener una silueta clara y una elevación suficiente para leerse como objeto manipulable.", "section": "elevation" }
+    ],
+    "dos": ["Do usar Azul pizarra para texto, iconografía y contornos que necesiten contraste.", "Do emplear pasteles por significado: Verde acierto para confirmación, Coral de corrección para error y Lila de acción para elecciones o acciones.", "Do conservar objetivos e instrucciones en frases cortas, tamaño fluido y peso alto.", "Do hacer que los elementos interactivos se lean como piezas tocables mediante bordes gruesos, esquinas suaves y elevación.", "Do mantener objetivos táctiles amplios y touch-action adecuado en elementos de arrastre."],
+    "donts": ["Don't depender de hover, texto pequeño o precisión de puntero para comprender una actividad.", "Don't usar colores pastel sin una función semántica o sustituir el contraste estructural por tonos claros.", "Don't convertir las tarjetas y controles en superficies planas, afiladas o visualmente frágiles.", "Don't introducir tipografías estrechas, frágiles o demasiado adultas que compitan con Nunito."]
+  }
+}
