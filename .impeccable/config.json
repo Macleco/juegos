@@ -1,3 +1,18 @@
 {
-  "buildPath": "comp"
+  "buildPath": "comp",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/styles/index.css"
+        ],
+        "createdAt": "2026-11-21T17:53:14.107Z",
+        "reason": "false positive: line 21 uses inset bottom shadows on circular icon controls, not a one-sided accent border"
+      }
+    ]
+  }
 }
