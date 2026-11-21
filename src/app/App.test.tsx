@@ -12,18 +12,19 @@ describe('App', () => {
     render(<App />)
 
     expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
-    expect(screen.queryByText(/aprende jugando/i)).not.toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: /elige temática/i })).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'DINOSAURIOS' })).toContainElement(
+    expect(screen.getByRole('heading', { name: /¿a qué quieres jugar hoy/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /dinosaurios.*8 juegos para contar, leer y clasificar.*ver 8 juegos/i })).toContainElement(
       screen.getAllByAltText('')[0],
     )
     expect(screen.getAllByAltText('')[0]).toHaveAttribute('src', 'logo_dinosaurios_no_texto.png')
-    expect(screen.getByRole('button', { name: 'AMISTAD' })).toContainElement(
+    expect(screen.getByRole('button', { name: /amistad.*un juego para aprender a convivir.*jugar ahora/i })).toContainElement(
       screen.getAllByAltText('')[1],
     )
     expect(screen.getAllByAltText('')[1]).toHaveAttribute('src', 'amistad_no_texto.png')
     expect(screen.getByText('DINOSAURIOS')).toBeInTheDocument()
     expect(screen.getByText('AMISTAD')).toBeInTheDocument()
+    expect(screen.getByText('8 juegos para contar, leer y clasificar')).toBeInTheDocument()
+    expect(screen.getByText('Un juego para aprender a convivir')).toBeInTheDocument()
   })
 
   it('opens the dinosaur game list before starting its game', () => {
