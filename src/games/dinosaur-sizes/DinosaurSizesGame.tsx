@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { GameHeader } from '../../components/GameHeader'
 import { Modal } from '../../components/Modal'
+import { DinosaurImage } from '../../components/DinosaurImage'
 import { DINOSAURS } from '../../data/dinosaurs'
 import { createGameState, createRound, placeDinosaurSize, type DinosaurSizeCard, type DinosaurSizesRound, type DinosaurSizesState } from './game-state'
 
@@ -26,7 +27,7 @@ const BOARD_CELLS = [
 function SizeDinosaur({ card, image, name }: { card: DinosaurSizeCard; image: string; name: string }) {
   const sizeWidths = [14, 23, 35, 48, 61, 75, 90]
   const width = `${sizeWidths[card.size - 1]}%`
-  return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
+  return <DinosaurImage src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
 }
 
 function DraggableDinosaur({ card, image, name, selected, dragging, onSelect }: { card: DinosaurSizeCard; image: string; name: string; selected: boolean; dragging: boolean; onSelect: () => void }) {

@@ -16,6 +16,13 @@ describe('DinosaurSizesGame', () => {
     expect(screen.getAllByRole('button', { name: /hueco/i })).toHaveLength(round.sizeCount)
   })
 
+  it('uses the shared compact dinosaur illustration', () => {
+    const { container } = render(<DinosaurSizesGame createRound={() => round} />)
+    const image = container.querySelector('.size-dinosaur-card img')
+
+    expect(image).toHaveAttribute('src', round.dinosaur.image.replace('.png', '-960.webp'))
+  })
+
   it('orders a dinosaur by touching it and then its matching size space', () => {
     render(<DinosaurSizesGame createRound={() => round} />)
     const smallest = round.cards.find((card) => card.size === 1)!

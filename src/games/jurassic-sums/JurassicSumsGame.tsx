@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { GameHeader } from '../../components/GameHeader'
+import { DinosaurImage } from '../../components/DinosaurImage'
 import { Modal } from '../../components/Modal'
 import { DINOSAURS } from '../../data/dinosaurs'
 import {
@@ -28,7 +29,7 @@ function promptFor(step: keyof typeof STEP_INDEX) {
 function DinosaurGroup({ position, dinosaurs, active }: { position: 'primer' | 'segundo'; dinosaurs: JurassicSumsRound['leftGroup']; active: boolean }) {
   return <section className={`sum-dinosaur-group ${active ? 'active' : ''}`} aria-label={`${position} grupo de dinosaurios`}>
     <ul className="sum-dinosaur-list" aria-label={`${position} grupo de dinosaurios`}>
-      {dinosaurs.map((dinosaur, index) => <li key={`${dinosaur.id}-${index}`}><img src={dinosaur.image} alt={`Dinosaurio ${index + 1}: ${dinosaur.name}`} /></li>)}
+      {dinosaurs.map((dinosaur, index) => <li key={`${dinosaur.id}-${index}`}><DinosaurImage src={dinosaur.image} alt={`Dinosaurio ${index + 1}: ${dinosaur.name}`} /></li>)}
     </ul>
   </section>
 }

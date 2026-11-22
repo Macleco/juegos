@@ -33,7 +33,7 @@ describe('JurassicMemoryGame', () => {
     render(<JurassicMemoryGame createRound={() => round} />)
 
     fireEvent.click(screen.getByRole('button', { name: 'Carta boca abajo 1' }))
-    expect(screen.getByRole('img', { name: 'Triceratops' })).toHaveAttribute('src', 'dinos/triceratops.png')
+    expect(screen.getByRole('img', { name: 'Triceratops' })).toHaveAttribute('src', 'dinos/triceratops-960.webp')
     expect(screen.getByText('TRICERATOPS')).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: 'Carta boca abajo 3' }))

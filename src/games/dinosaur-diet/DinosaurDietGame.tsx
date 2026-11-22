@@ -5,6 +5,7 @@ import { useState } from 'react'
 import type { Diet, Dinosaur } from '../../data/dinosaurs'
 import { DINOSAURS } from '../../data/dinosaurs'
 import { GameHeader } from '../../components/GameHeader'
+import { DinosaurImage } from '../../components/DinosaurImage'
 import { Modal } from '../../components/Modal'
 import { ProgressIndicator } from '../../components/ProgressIndicator'
 import { classifyCurrentCard, createGameState, selectRound } from './game-state'
@@ -12,7 +13,7 @@ import { classifyCurrentCard, createGameState, selectRound } from './game-state'
 function Card({ dinosaur, active = false }: { dinosaur: Dinosaur; active?: boolean }) {
   const draggable = useDraggable({ id: dinosaur.id, disabled: !active })
   return <article ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} data-testid={active ? 'active-dinosaur-card' : undefined} className={`dino-card ${active ? 'active-card' : ''}`} style={active ? { transform: CSS.Translate.toString(draggable.transform) } : undefined}>
-    <img className="dino-image" src={dinosaur.image} alt={`Fotografía de ${dinosaur.name}`} /><strong>{dinosaur.name}</strong>
+    <DinosaurImage className="dino-image" src={dinosaur.image} alt={`Fotografía de ${dinosaur.name}`} /><strong>{dinosaur.name}</strong>
   </article>
 }
 function Zone({ diet, dinosaurs }: { diet: Diet; dinosaurs: readonly Dinosaur[] }) {

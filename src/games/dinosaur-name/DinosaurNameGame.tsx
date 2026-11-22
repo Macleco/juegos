@@ -4,6 +4,7 @@ import { Pointer } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 import { GameHeader } from '../../components/GameHeader'
+import { DinosaurImage } from '../../components/DinosaurImage'
 import { Modal } from '../../components/Modal'
 import { ProgressIndicator } from '../../components/ProgressIndicator'
 import { DINOSAURS, type Dinosaur } from '../../data/dinosaurs'
@@ -12,7 +13,7 @@ import { createGameState, matchCurrentName, selectRound } from './game-state'
 function PhotoZone({ dinosaur, resolved }: { dinosaur: Dinosaur; resolved: boolean }) {
   const drop = useDroppable({ id: dinosaur.id })
   return <article ref={drop.setNodeRef} data-testid="dinosaur-photo-zone" className={`dinosaur-photo-zone ${drop.isOver ? 'over' : ''} ${resolved ? 'resolved' : ''}`} aria-label={`Fotografía de ${dinosaur.name}`}>
-    <img src={dinosaur.image} alt={`Fotografía de ${dinosaur.name}`} />
+    <DinosaurImage src={dinosaur.image} alt={`Fotografía de ${dinosaur.name}`} />
     {resolved && <span data-testid={`resolved-${dinosaur.id}`} className="resolved-badge">✓ ¡Correcto!</span>}
   </article>
 }

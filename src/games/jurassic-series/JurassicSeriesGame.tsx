@@ -3,6 +3,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { useState } from 'react'
 
 import { GameHeader } from '../../components/GameHeader'
+import { DinosaurImage } from '../../components/DinosaurImage'
 import { Modal } from '../../components/Modal'
 import { DINOSAURS, type Dinosaur } from '../../data/dinosaurs'
 import { createGameState, createRound, placeDinosaur, type JurassicSeries, type JurassicSeriesState } from './game-state'
@@ -14,7 +15,7 @@ interface JurassicSeriesGameProps {
 }
 
 function SeriesDinosaur({ dinosaur }: { dinosaur: Dinosaur }) {
-  return <img src={dinosaur.image} alt={dinosaur.name} />
+  return <DinosaurImage src={dinosaur.image} alt={dinosaur.name} />
 }
 
 function AnswerDinosaur({ dinosaur, selected, onSelect }: { dinosaur: Dinosaur; selected: boolean; onSelect: () => void }) {

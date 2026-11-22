@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { GameHeader } from '../../components/GameHeader'
+import { DinosaurImage } from '../../components/DinosaurImage'
 import { Modal } from '../../components/Modal'
 import { DINOSAURS } from '../../data/dinosaurs'
 import { createGameState, createRound, hideUnmatchedCards, selectCard, type MemoryCard } from './game-state'
@@ -54,7 +55,7 @@ export function JurassicMemoryGame({ onHome = () => {}, onDinosaurGames = () => 
           const visible = state.faceUpIds.includes(card.id) || state.matchedIds.includes(card.id)
           const matched = state.matchedIds.includes(card.id)
           return <button key={card.id} className={`memory-card ${visible ? 'face-up' : ''} ${matched ? 'matched' : ''}`} onClick={() => chooseCard(card.id)} disabled={matched} aria-label={visible ? card.dinosaur.name : `Carta boca abajo ${index + 1}`}>
-            {visible ? <span className="memory-card-front"><img src={card.dinosaur.image} alt={card.dinosaur.name} /><strong>{card.dinosaur.name.toUpperCase()}</strong></span> : <img className="memory-card-back" data-testid="memory-card-back" src="reverso_memory.png" alt="" />}
+            {visible ? <span className="memory-card-front"><DinosaurImage src={card.dinosaur.image} alt={card.dinosaur.name} /><strong>{card.dinosaur.name.toUpperCase()}</strong></span> : <img className="memory-card-back" data-testid="memory-card-back" src="reverso_memory.png" alt="" />}
           </button>
         })}
       </div>

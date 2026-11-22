@@ -1,14 +1,24 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { GameHeader } from './GameHeader'
+import { DinosaurImage } from './DinosaurImage'
 import { Modal } from './Modal'
 import { ProgressIndicator } from './ProgressIndicator'
 
 describe('classroom UI primitives', () => {
+  it('loads the compact dinosaur WebP and falls back to its PNG', () => {
+    render(<DinosaurImage src="dinos/triceratops.png" alt="Triceratops" />)
+    const image = screen.getByRole('img', { name: 'Triceratops' })
+
+    expect(image).toHaveAttribute('src', 'dinos/triceratops-960.webp')
+    fireEvent.error(image)
+    expect(image).toHaveAttribute('src', 'dinos/triceratops.png')
+  })
+
   it('keeps the home control fitted to its icon in the header grid', () => {
     const styles = readFileSync(resolve(process.cwd(), 'src/styles/index.css'), 'utf8')
 
