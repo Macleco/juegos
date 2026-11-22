@@ -24,7 +24,8 @@ const BOARD_CELLS = [
 ] as const
 
 function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; image: string; name: string; count: number }) {
-  const width = `${12 + (card.size / count) * 88}%`
+  const sizeProgress = (card.size - 1) / (count - 1)
+  const width = `${12 + Math.pow(sizeProgress, 1.2) * 88}%`
   return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
 }
 

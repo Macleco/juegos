@@ -41,13 +41,13 @@ export function createRound(dinosaurs: readonly Dinosaur[]): DinosaurSizesRound 
   const sizeCount = 7
   const boardPositions = shuffle(Array.from({ length: sizeCount }, (_, index) => index))
   const offsets = shuffle([
-    { horizontalOffset: -6, verticalOffset: -4 },
-    { horizontalOffset: 6, verticalOffset: 3 },
-    { horizontalOffset: -3, verticalOffset: 6 },
-    { horizontalOffset: 4, verticalOffset: -7 },
-    { horizontalOffset: -7, verticalOffset: 2 },
-    { horizontalOffset: 7, verticalOffset: -2 },
-    { horizontalOffset: 1, verticalOffset: 7 },
+    { horizontalOffset: -6, verticalOffset: -9 },
+    { horizontalOffset: 6, verticalOffset: 6 },
+    { horizontalOffset: -3, verticalOffset: 10 },
+    { horizontalOffset: 4, verticalOffset: -11 },
+    { horizontalOffset: -7, verticalOffset: 3 },
+    { horizontalOffset: 7, verticalOffset: -5 },
+    { horizontalOffset: 1, verticalOffset: 9 },
   ])
   const cards = shuffle(Array.from({ length: sizeCount }, (_, index) => ({
     id: `${dinosaur.id}-size-${index + 1}`,
