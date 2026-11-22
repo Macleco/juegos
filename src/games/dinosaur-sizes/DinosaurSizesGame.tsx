@@ -13,6 +13,16 @@ interface DinosaurSizesGameProps {
   createRound?: () => DinosaurSizesRound
 }
 
+const BOARD_CELLS = [
+  { column: '1 / span 3', row: '1 / span 2' },
+  { column: '5 / span 3', row: '1 / span 2' },
+  { column: '9 / span 3', row: '1 / span 2' },
+  { column: '3 / span 3', row: '3 / span 2' },
+  { column: '7 / span 3', row: '3 / span 2' },
+  { column: '1 / span 3', row: '5 / span 2' },
+  { column: '9 / span 3', row: '5 / span 2' },
+] as const
+
 function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; image: string; name: string; count: number }) {
   const width = `${12 + (card.size / count) * 88}%`
   return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
@@ -20,9 +30,8 @@ function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; im
 
 function DraggableDinosaur({ card, image, name, count, selected, onSelect }: { card: DinosaurSizeCard; image: string; name: string; count: number; selected: boolean; onSelect: () => void }) {
   const draggable = useDraggable({ id: card.id })
-  const column = card.boardPosition % 4 + 1
-  const row = Math.floor(card.boardPosition / 4) + 1
-  return <button ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} className={`size-dinosaur-card ${selected ? 'selected' : ''}`} style={{ transform: CSS.Translate.toString(draggable.transform), gridColumn: column, gridRow: row }} onClick={onSelect} aria-label={`Dinosaurio para ordenar: ${name}, tamaño ${card.size}`}>
+  const cell = BOARD_CELLS[card.boardPosition]
+  return <button ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} className={`size-dinosaur-card ${selected ? 'selected' : ''}`} style={{ transform: CSS.Translate.toString(draggable.transform), translate: `${card.horizontalOffset}% ${card.verticalOffset}%`, gridColumn: cell.column, gridRow: cell.row }} onClick={onSelect} aria-label={`Dinosaurio para ordenar: ${name}, tamaño ${card.size}`}>
     <SizeDinosaur card={card} image={image} name={name} count={count} />
   </button>
 }

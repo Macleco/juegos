@@ -14,6 +14,7 @@ describe('dinosaur sizes game rules', () => {
     expect(round.cards.map((card) => card.size).sort()).toEqual([1, 2, 3, 4, 5, 6, 7])
     expect(new Set(round.cards.map((card) => card.id)).size).toBe(7)
     expect(new Set(round.cards.map((card) => card.boardPosition)).size).toBe(7)
+    expect(new Set(round.cards.map((card) => `${card.horizontalOffset}:${card.verticalOffset}`)).size).toBe(7)
   })
 
   it('always uses seven cards', () => {

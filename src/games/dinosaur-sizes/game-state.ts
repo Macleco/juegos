@@ -4,6 +4,8 @@ export interface DinosaurSizeCard {
   id: string
   size: number
   boardPosition: number
+  horizontalOffset: number
+  verticalOffset: number
 }
 
 export interface DinosaurSizesRound {
@@ -38,10 +40,20 @@ export function createRound(dinosaurs: readonly Dinosaur[]): DinosaurSizesRound 
   const dinosaur = dinosaurs[Math.floor(Math.random() * dinosaurs.length)]
   const sizeCount = 7
   const boardPositions = shuffle(Array.from({ length: sizeCount }, (_, index) => index))
+  const offsets = shuffle([
+    { horizontalOffset: -6, verticalOffset: -4 },
+    { horizontalOffset: 6, verticalOffset: 3 },
+    { horizontalOffset: -3, verticalOffset: 6 },
+    { horizontalOffset: 4, verticalOffset: -7 },
+    { horizontalOffset: -7, verticalOffset: 2 },
+    { horizontalOffset: 7, verticalOffset: -2 },
+    { horizontalOffset: 1, verticalOffset: 7 },
+  ])
   const cards = shuffle(Array.from({ length: sizeCount }, (_, index) => ({
     id: `${dinosaur.id}-size-${index + 1}`,
     size: index + 1,
     boardPosition: boardPositions[index],
+    ...offsets[index],
   })))
 
   return { dinosaur, cards, sizeCount }
