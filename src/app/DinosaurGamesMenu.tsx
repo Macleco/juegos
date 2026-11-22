@@ -8,10 +8,9 @@ interface DinosaurGamesMenuProps {
   onStartJurassicLostLetters: () => void
   onStartMathEggs: () => void
   onStartJurassicSeries: () => void
-  onStartPaleontologists: () => void
 }
 
-export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables, onStartJurassicLostLetters, onStartMathEggs, onStartJurassicSeries, onStartPaleontologists }: DinosaurGamesMenuProps) {
+export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables, onStartJurassicLostLetters, onStartMathEggs, onStartJurassicSeries }: DinosaurGamesMenuProps) {
   return (
     <main className="game-menu dinosaur-games-menu">
       <header className="game-menu-header">
@@ -75,10 +74,6 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
             <strong>Series jurásicas</strong>
             <small>Descubre qué dinosaurio viene después.</small>
           </span>
-        </button>
-        <button className="game-menu-card dinosaur-game-card paleontology-menu-card" onClick={onStartPaleontologists}>
-          <img src="dinos/triceratops.png" alt="" />
-          <span><strong>Paleontólogos por un día</strong><small>Excava fósiles y monta el esqueleto.</small></span>
         </button>
       </section>
     </main>

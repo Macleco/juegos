@@ -136,15 +136,6 @@ describe('App', () => {
     expect(window.location.hash).toBe('#/jurassic-series')
   })
 
-  it('opens Paleontólogos por un día from the dinosaur menu', () => {
-    render(<App />)
-    fireEvent.click(screen.getByRole('button', { name: /dinosaurios/i }))
-    fireEvent.click(screen.getByRole('button', { name: /paleontólogos por un día/i }))
-    expect(screen.getByRole('heading', { name: /paleontólogos por un día/i })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /elige un dinosaurio para excavar/i })).toBeInTheDocument()
-    expect(window.location.hash).toBe('#/paleontologists')
-  })
-
   it.each([
     ['¿Qué comía cada dinosaurio?', '#/dinosaur-diet'],
     ['¿Cómo se llama el dinosaurio?', '#/dinosaur-name'],
