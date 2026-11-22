@@ -17,8 +17,8 @@ export function GameMenu({ onOpenDinosaurGames, onStartFriendshipSignals }: Game
           <img src="logo_dinosaurios_no_texto.png" alt="" />
           <span>
             <strong>DINOSAURIOS</strong>
-            <small>8 juegos para contar, leer y clasificar</small>
-            <em>Ver 8 juegos</em>
+            <small>9 juegos para contar, leer y clasificar</small>
+            <em>Ver 9 juegos</em>
           </span>
         </button>
         <button className="theme-menu-card friendship-theme-card" onClick={onStartFriendshipSignals}>

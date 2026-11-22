@@ -13,7 +13,7 @@ describe('App', () => {
 
     expect(screen.getByRole('img', { name: /juegos interactivos/i })).toHaveAttribute('src', 'logo.png')
     expect(screen.getByRole('heading', { name: /¿a qué quieres jugar hoy/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /dinosaurios.*8 juegos para contar, leer y clasificar.*ver 8 juegos/i })).toContainElement(
+    expect(screen.getByRole('button', { name: /dinosaurios.*9 juegos para contar, leer y clasificar.*ver 9 juegos/i })).toContainElement(
       screen.getAllByAltText('')[0],
     )
     expect(screen.getAllByAltText('')[0]).toHaveAttribute('src', 'logo_dinosaurios_no_texto.png')
@@ -23,7 +23,7 @@ describe('App', () => {
     expect(screen.getAllByAltText('')[1]).toHaveAttribute('src', 'amistad_no_texto.png')
     expect(screen.getByText('DINOSAURIOS')).toBeInTheDocument()
     expect(screen.getByText('AMISTAD')).toBeInTheDocument()
-    expect(screen.getByText('8 juegos para contar, leer y clasificar')).toBeInTheDocument()
+    expect(screen.getByText('9 juegos para contar, leer y clasificar')).toBeInTheDocument()
     expect(screen.getByText('Un juego para aprender a convivir')).toBeInTheDocument()
   })
 
