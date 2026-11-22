@@ -3,7 +3,8 @@ import type { Dinosaur } from '../../data/dinosaurs'
 export interface DinosaurSizeCard {
   id: string
   size: number
-  verticalOffset: number
+  verticalPosition: number
+  horizontalPosition: number
 }
 
 export interface DinosaurSizesRound {
@@ -37,11 +38,13 @@ export function createRound(dinosaurs: readonly Dinosaur[]): DinosaurSizesRound 
 
   const dinosaur = dinosaurs[Math.floor(Math.random() * dinosaurs.length)]
   const sizeCount = Math.random() < 0.5 ? 6 : 7
-  const offsets = shuffle([18, 34, 51, 68, 85, 102, 119]).slice(0, sizeCount)
+  const verticalPositions = shuffle([7, 18, 29, 40, 51, 62, 73]).slice(0, sizeCount)
+  const horizontalPositions = shuffle([11, 25, 39, 53, 67, 79, 88]).slice(0, sizeCount)
   const cards = shuffle(Array.from({ length: sizeCount }, (_, index) => ({
     id: `${dinosaur.id}-size-${index + 1}`,
     size: index + 1,
-    verticalOffset: offsets[index],
+    verticalPosition: verticalPositions[index],
+    horizontalPosition: horizontalPositions[index],
   })))
 
   return { dinosaur, cards, sizeCount }

@@ -13,7 +13,8 @@ describe('dinosaur sizes game rules', () => {
     expect(round.cards).toHaveLength(6)
     expect(round.cards.map((card) => card.size).sort()).toEqual([1, 2, 3, 4, 5, 6])
     expect(new Set(round.cards.map((card) => card.id)).size).toBe(6)
-    expect(new Set(round.cards.map((card) => card.verticalOffset)).size).toBe(6)
+    expect(new Set(round.cards.map((card) => card.verticalPosition)).size).toBe(6)
+    expect(new Set(round.cards.map((card) => card.horizontalPosition)).size).toBe(6)
   })
 
   it('uses seven cards in the alternate random branch', () => {
