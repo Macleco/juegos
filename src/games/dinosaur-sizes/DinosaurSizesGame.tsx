@@ -17,14 +17,14 @@ const BOARD_CELLS = [
   { column: '1 / span 3', row: '1 / span 2' },
   { column: '5 / span 3', row: '1 / span 2' },
   { column: '9 / span 3', row: '1 / span 2' },
-  { column: '3 / span 3', row: '3 / span 2' },
+  { column: '1 / span 3', row: '3 / span 2' },
+  { column: '4 / span 3', row: '3 / span 2' },
   { column: '7 / span 3', row: '3 / span 2' },
-  { column: '1 / span 3', row: '5 / span 2' },
-  { column: '9 / span 3', row: '5 / span 2' },
+  { column: '10 / span 3', row: '3 / span 2' },
 ] as const
 
 function SizeDinosaur({ card, image, name }: { card: DinosaurSizeCard; image: string; name: string }) {
-  const sizeWidths = [15, 25, 37, 50, 63, 75, 87]
+  const sizeWidths = [14, 23, 35, 48, 61, 75, 90]
   const width = `${sizeWidths[card.size - 1]}%`
   return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
 }
