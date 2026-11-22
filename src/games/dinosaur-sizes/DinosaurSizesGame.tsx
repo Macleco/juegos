@@ -1,0 +1,92 @@
+import { DndContext, PointerSensor, useDraggable, useDroppable, useSensor, useSensors } from '@dnd-kit/core'
+import { CSS } from '@dnd-kit/utilities'
+import { useState } from 'react'
+
+import { GameHeader } from '../../components/GameHeader'
+import { Modal } from '../../components/Modal'
+import { DINOSAURS } from '../../data/dinosaurs'
+import { createGameState, createRound, placeDinosaurSize, type DinosaurSizeCard, type DinosaurSizesRound, type DinosaurSizesState } from './game-state'
+
+interface DinosaurSizesGameProps {
+  onHome?: () => void
+  onDinosaurGames?: () => void
+  createRound?: () => DinosaurSizesRound
+}
+
+function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; image: string; name: string; count: number }) {
+  const height = `${28 + (card.size / count) * 62}%`
+  return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ height }} />
+}
+
+function DraggableDinosaur({ card, image, name, count, selected, onSelect }: { card: DinosaurSizeCard; image: string; name: string; count: number; selected: boolean; onSelect: () => void }) {
+  const draggable = useDraggable({ id: card.id })
+  return <button ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} className={`size-dinosaur-card ${selected ? 'selected' : ''}`} style={{ transform: CSS.Translate.toString(draggable.transform) }} onClick={onSelect} aria-label={`Dinosaurio para ordenar: ${name}, tamaño ${card.size}`}>
+    <SizeDinosaur card={card} image={image} name={name} count={count} />
+  </button>
+}
+
+function SizeSlot({ slot, card, image, name, count, selectedCardId, onPlace }: { slot: number; card?: DinosaurSizeCard; image: string; name: string; count: number; selectedCardId: string | null; onPlace: (slot: number, cardId: string) => void }) {
+  const droppable = useDroppable({ id: `size-slot-${slot}` })
+  const label = slot === 0 ? 'Más pequeño' : slot === count - 1 ? 'Más grande' : `Posición ${slot + 1}`
+  if (card) return <div className="size-slot filled" aria-label={`${label}: ${name}`}><SizeDinosaur card={card} image={image} name={name} count={count} /><span>{label}</span></div>
+
+  return <button ref={droppable.setNodeRef} className={`size-slot ${droppable.isOver ? 'over' : ''}`} onClick={() => selectedCardId && onPlace(slot, selectedCardId)} aria-label={`Hueco ${label}`}>
+    <span>{label}</span>
+  </button>
+}
+
+export function DinosaurSizesGame({ onHome = () => {}, onDinosaurGames = () => {}, createRound: makeRound = () => createRound(DINOSAURS) }: DinosaurSizesGameProps) {
+  const [state, setState] = useState<DinosaurSizesState>(() => createGameState(makeRound()))
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
+  const [wrongSlot, setWrongSlot] = useState<number | null>(null)
+  const [settings, setSettings] = useState(false)
+  const [celebrate, setCelebrate] = useState(false)
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
+
+  const restart = () => {
+    setState(createGameState(makeRound()))
+    setSelectedCardId(null)
+    setWrongSlot(null)
+    setSettings(false)
+    setCelebrate(false)
+  }
+
+  const place = (slot: number, cardId: string) => {
+    const result = placeDinosaurSize(state, slot, cardId)
+    if (!result.accepted) {
+      setWrongSlot(slot)
+      window.setTimeout(() => setWrongSlot(null), 450)
+      return
+    }
+    setState(result.state)
+    setSelectedCardId(null)
+    if (result.state.completed) window.setTimeout(() => setCelebrate(true), 350)
+  }
+
+  const placedCards = state.placed.map((cardId) => state.round.cards.find((card) => card.id === cardId))
+  const availableCards = state.round.cards.filter((card) => !state.placed.includes(card.id))
+  const { dinosaur, sizeCount } = state.round
+
+  return <main className="game-shell dinosaur-sizes-game">
+    <GameHeader title="Tamaños jurásicos" onHome={onHome} onDinosaurGames={onDinosaurGames} onRestart={restart} onSettings={() => setSettings(true)} />
+    <DndContext sensors={sensors} onDragEnd={({ active, over }) => {
+      const slotMatch = typeof over?.id === 'string' ? /^size-slot-(\d+)$/.exec(over.id) : null
+      if (typeof active.id === 'string' && slotMatch) place(Number(slotMatch[1]), active.id)
+    }}>
+      <section className="sizes-game-content" aria-label="Ordena los dinosaurios por tamaño">
+        <p className="sizes-instruction">ORDENA DE MÁS PEQUEÑO A MÁS GRANDE</p>
+        <section className="sizes-dinosaur-area" aria-label={`Dinosaurios ${dinosaur.name} para ordenar`}>
+          {availableCards.map((card) => <DraggableDinosaur key={card.id} card={card} image={dinosaur.image} name={dinosaur.name} count={sizeCount} selected={selectedCardId === card.id} onSelect={() => setSelectedCardId(card.id)} />)}
+        </section>
+        <section className="sizes-order-area" aria-label="Fila para ordenar por tamaño">
+          <div className="size-slots" style={{ gridTemplateColumns: `repeat(${sizeCount}, minmax(0, 1fr))` }}>
+            {Array.from({ length: sizeCount }, (_, slot) => <div key={slot} className={wrongSlot === slot ? 'wrong' : ''}><SizeSlot slot={slot} card={placedCards[slot]} image={dinosaur.image} name={dinosaur.name} count={sizeCount} selectedCardId={selectedCardId} onPlace={place} /></div>)}
+          </div>
+          <p className="sizes-progress" aria-live="polite">{state.placed.filter(Boolean).length} / {sizeCount} dinosaurios ordenados</p>
+        </section>
+      </section>
+    </DndContext>
+    {settings && <Modal title="Configuración" onClose={() => setSettings(false)}><p>Panel preparado para futuras opciones de aula.</p><button className="primary-button" onClick={restart}>Reiniciar partida</button></Modal>}
+    {celebrate && <Modal title="¡Muy bien!" onClose={() => setCelebrate(false)}><p>¡Has ordenado todos los dinosaurios de más pequeño a más grande!</p><button className="primary-button" onClick={restart}>Jugar otra vez</button></Modal>}
+  </main>
+}

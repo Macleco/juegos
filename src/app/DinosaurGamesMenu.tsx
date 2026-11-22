@@ -8,9 +8,10 @@ interface DinosaurGamesMenuProps {
   onStartJurassicLostLetters: () => void
   onStartMathEggs: () => void
   onStartJurassicSeries: () => void
+  onStartDinosaurSizes: () => void
 }
 
-export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables, onStartJurassicLostLetters, onStartMathEggs, onStartJurassicSeries }: DinosaurGamesMenuProps) {
+export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaurName, onStartJurassicSums, onStartJurassicMemory, onStartJurassicSyllables, onStartJurassicLostLetters, onStartMathEggs, onStartJurassicSeries, onStartDinosaurSizes }: DinosaurGamesMenuProps) {
   return (
     <main className="game-menu dinosaur-games-menu">
       <header className="game-menu-header">
@@ -73,6 +74,13 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           <span>
             <strong>Series jurásicas</strong>
             <small>Descubre qué dinosaurio viene después.</small>
+          </span>
+        </button>
+        <button className="game-menu-card dinosaur-game-card dinosaur-sizes-menu-card" onClick={onStartDinosaurSizes}>
+          <img src="dinos/stegosaurus.png" alt="" />
+          <span>
+            <strong>Tamaños jurásicos</strong>
+            <small>Ordena el mismo dinosaurio de más pequeño a más grande.</small>
           </span>
         </button>
       </section>
