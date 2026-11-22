@@ -23,24 +23,24 @@ const BOARD_CELLS = [
   { column: '9 / span 3', row: '5 / span 2' },
 ] as const
 
-function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; image: string; name: string; count: number }) {
-  const sizeProgress = (card.size - 1) / (count - 1)
-  const width = `${12 + Math.pow(sizeProgress, 1.2) * 88}%`
+function SizeDinosaur({ card, image, name }: { card: DinosaurSizeCard; image: string; name: string }) {
+  const sizeWidths = [7, 15, 26, 41, 59, 79, 100]
+  const width = `${sizeWidths[card.size - 1]}%`
   return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
 }
 
-function DraggableDinosaur({ card, image, name, count, selected, onSelect }: { card: DinosaurSizeCard; image: string; name: string; count: number; selected: boolean; onSelect: () => void }) {
+function DraggableDinosaur({ card, image, name, selected, onSelect }: { card: DinosaurSizeCard; image: string; name: string; selected: boolean; onSelect: () => void }) {
   const draggable = useDraggable({ id: card.id })
   const cell = BOARD_CELLS[card.boardPosition]
   return <button ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} className={`size-dinosaur-card ${selected ? 'selected' : ''}`} style={{ transform: CSS.Translate.toString(draggable.transform), translate: `${card.horizontalOffset}% ${card.verticalOffset}%`, gridColumn: cell.column, gridRow: cell.row }} onClick={onSelect} aria-label={`Dinosaurio para ordenar: ${name}, tamaño ${card.size}`}>
-    <SizeDinosaur card={card} image={image} name={name} count={count} />
+    <SizeDinosaur card={card} image={image} name={name} />
   </button>
 }
 
 function SizeSlot({ slot, card, image, name, count, selectedCardId, onPlace }: { slot: number; card?: DinosaurSizeCard; image: string; name: string; count: number; selectedCardId: string | null; onPlace: (slot: number, cardId: string) => void }) {
   const droppable = useDroppable({ id: `size-slot-${slot}` })
   const label = slot === 0 ? 'Más pequeño' : slot === count - 1 ? 'Más grande' : `Posición ${slot + 1}`
-  if (card) return <div className="size-slot filled" aria-label={`${label}: ${name}`}><SizeDinosaur card={card} image={image} name={name} count={count} /><span>{label}</span></div>
+  if (card) return <div className="size-slot filled" aria-label={`${label}: ${name}`}><SizeDinosaur card={card} image={image} name={name} /><span>{label}</span></div>
 
   return <button ref={droppable.setNodeRef} className={`size-slot ${droppable.isOver ? 'over' : ''}`} onClick={() => selectedCardId && onPlace(slot, selectedCardId)} aria-label={`Hueco ${label}`}>
     <span>{label}</span>
@@ -88,7 +88,7 @@ export function DinosaurSizesGame({ onHome = () => {}, onDinosaurGames = () => {
       <section className="sizes-game-content" aria-label="Ordena los dinosaurios por tamaño">
         <p className="sizes-instruction">ORDENA DE MÁS PEQUEÑO A MÁS GRANDE</p>
         <section className="sizes-dinosaur-area" aria-label={`Dinosaurios ${dinosaur.name} para ordenar`}>
-          {availableCards.map((card) => <DraggableDinosaur key={card.id} card={card} image={dinosaur.image} name={dinosaur.name} count={sizeCount} selected={selectedCardId === card.id} onSelect={() => setSelectedCardId(card.id)} />)}
+          {availableCards.map((card) => <DraggableDinosaur key={card.id} card={card} image={dinosaur.image} name={dinosaur.name} selected={selectedCardId === card.id} onSelect={() => setSelectedCardId(card.id)} />)}
         </section>
         <section className="sizes-order-area" aria-label="Fila para ordenar por tamaño">
           <div className="size-slots" style={{ gridTemplateColumns: `repeat(${sizeCount}, minmax(0, 1fr))` }}>

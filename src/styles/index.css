@@ -160,7 +160,7 @@ button { cursor: pointer; } .game-shell { min-height: 100vh; padding: 2.1vh 4vw;
 .sizes-progress { background:#e4f7d9; }
 .sizes-dinosaur-area { min-height:0; padding:clamp(.75rem,1.6vw,1.5rem); display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); grid-template-rows:repeat(6,minmax(0,1fr)); gap:clamp(.2rem,.35vw,.55rem); overflow:hidden; border:6px solid #8ed1ee; border-radius:42px; background:linear-gradient(160deg,#effaff,#d8f2ff); box-shadow:0 8px 18px #123d5620; }
 .size-dinosaur-card { min-width:0; min-height:0; width:100%; height:100%; padding:0; display:flex; align-items:center; justify-content:center; border:0; border-radius:24px; background:transparent; touch-action:none; transition:transform .18s ease-out,filter .18s ease-out; }
-.size-dinosaur-card img { max-width:92%; max-height:86%; height:auto; object-fit:contain; filter:drop-shadow(0 7px 5px #123d5628); pointer-events:none; }
+.size-dinosaur-card img { max-width:96%; max-height:92%; height:auto; object-fit:contain; filter:drop-shadow(0 7px 5px #123d5628); pointer-events:none; }
 .size-dinosaur-card.selected { transform:translateY(-10px); filter:drop-shadow(0 0 0.35rem #f1ba37); }
 .size-dinosaur-card:focus-visible { outline:5px solid #7064b4; outline-offset:4px; }
 .sizes-order-area { display:grid; gap:clamp(.6rem,1.3vh,1rem); }.size-slots { min-height:clamp(140px,23vh,250px); display:grid; gap:clamp(.45rem,1.1vw,1.1rem); align-items:stretch; }
