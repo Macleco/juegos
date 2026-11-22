@@ -14,8 +14,8 @@ interface DinosaurSizesGameProps {
 }
 
 function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; image: string; name: string; count: number }) {
-  const height = `${28 + (card.size / count) * 62}%`
-  return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ height }} />
+  const width = `${28 + (card.size / count) * 62}%`
+  return <img src={image} alt={`${name}, tamaño ${card.size}`} style={{ width }} />
 }
 
 function DraggableDinosaur({ card, image, name, count, selected, onSelect }: { card: DinosaurSizeCard; image: string; name: string; count: number; selected: boolean; onSelect: () => void }) {
