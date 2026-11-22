@@ -77,7 +77,7 @@ export function DinosaurGamesMenu({ onBack, onStartDinosaurDiet, onStartDinosaur
           </span>
         </button>
         <button className="game-menu-card dinosaur-game-card dinosaur-sizes-menu-card" onClick={onStartDinosaurSizes}>
-          <img src="dinos/stegosaurus.png" alt="" />
+          <img src="logo_tamanos_jurasicos.png" alt="" />
           <span>
             <strong>Tamaños jurásicos</strong>
             <small>Ordena el mismo dinosaurio de más pequeño a más grande.</small>
