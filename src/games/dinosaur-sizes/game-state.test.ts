@@ -4,20 +4,19 @@ import { DINOSAURS } from '../../data/dinosaurs'
 import { createGameState, createRound, placeDinosaurSize } from './game-state'
 
 describe('dinosaur sizes game rules', () => {
-  it('creates six or seven shuffled sizes for one dinosaur', () => {
+  it('creates seven shuffled sizes for one dinosaur', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0)
     const round = createRound(DINOSAURS)
 
     expect(round.dinosaur).toBe(DINOSAURS[0])
-    expect(round.sizeCount).toBe(6)
-    expect(round.cards).toHaveLength(6)
-    expect(round.cards.map((card) => card.size).sort()).toEqual([1, 2, 3, 4, 5, 6])
-    expect(new Set(round.cards.map((card) => card.id)).size).toBe(6)
-    expect(new Set(round.cards.map((card) => card.verticalPosition)).size).toBe(6)
-    expect(new Set(round.cards.map((card) => card.horizontalPosition)).size).toBe(6)
+    expect(round.sizeCount).toBe(7)
+    expect(round.cards).toHaveLength(7)
+    expect(round.cards.map((card) => card.size).sort()).toEqual([1, 2, 3, 4, 5, 6, 7])
+    expect(new Set(round.cards.map((card) => card.id)).size).toBe(7)
+    expect(new Set(round.cards.map((card) => card.boardPosition)).size).toBe(7)
   })
 
-  it('uses seven cards in the alternate random branch', () => {
+  it('always uses seven cards', () => {
     vi.spyOn(Math, 'random').mockReturnValue(0.75)
     expect(createRound(DINOSAURS).sizeCount).toBe(7)
   })

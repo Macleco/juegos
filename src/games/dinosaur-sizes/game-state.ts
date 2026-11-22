@@ -3,8 +3,7 @@ import type { Dinosaur } from '../../data/dinosaurs'
 export interface DinosaurSizeCard {
   id: string
   size: number
-  verticalPosition: number
-  horizontalPosition: number
+  boardPosition: number
 }
 
 export interface DinosaurSizesRound {
@@ -37,14 +36,12 @@ export function createRound(dinosaurs: readonly Dinosaur[]): DinosaurSizesRound 
   if (dinosaurs.length === 0) throw new Error('At least one dinosaur is required')
 
   const dinosaur = dinosaurs[Math.floor(Math.random() * dinosaurs.length)]
-  const sizeCount = Math.random() < 0.5 ? 6 : 7
-  const verticalPositions = shuffle([7, 18, 29, 40, 51, 62, 73]).slice(0, sizeCount)
-  const horizontalPositions = shuffle([11, 25, 39, 53, 67, 79, 88]).slice(0, sizeCount)
+  const sizeCount = 7
+  const boardPositions = shuffle(Array.from({ length: sizeCount }, (_, index) => index))
   const cards = shuffle(Array.from({ length: sizeCount }, (_, index) => ({
     id: `${dinosaur.id}-size-${index + 1}`,
     size: index + 1,
-    verticalPosition: verticalPositions[index],
-    horizontalPosition: horizontalPositions[index],
+    boardPosition: boardPositions[index],
   })))
 
   return { dinosaur, cards, sizeCount }

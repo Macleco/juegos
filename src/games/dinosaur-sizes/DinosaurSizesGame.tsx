@@ -20,8 +20,9 @@ function SizeDinosaur({ card, image, name, count }: { card: DinosaurSizeCard; im
 
 function DraggableDinosaur({ card, image, name, count, selected, onSelect }: { card: DinosaurSizeCard; image: string; name: string; count: number; selected: boolean; onSelect: () => void }) {
   const draggable = useDraggable({ id: card.id })
-  const bottom = card.verticalPosition * (1 - card.size / (count + 1))
-  return <button ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} className={`size-dinosaur-card ${selected ? 'selected' : ''}`} style={{ transform: CSS.Translate.toString(draggable.transform), left: `${card.horizontalPosition}%`, bottom: `${bottom}%` }} onClick={onSelect} aria-label={`Dinosaurio para ordenar: ${name}, tamaño ${card.size}`}>
+  const column = card.boardPosition % 4 + 1
+  const row = Math.floor(card.boardPosition / 4) + 1
+  return <button ref={draggable.setNodeRef} {...draggable.listeners} {...draggable.attributes} className={`size-dinosaur-card ${selected ? 'selected' : ''}`} style={{ transform: CSS.Translate.toString(draggable.transform), gridColumn: column, gridRow: row }} onClick={onSelect} aria-label={`Dinosaurio para ordenar: ${name}, tamaño ${card.size}`}>
     <SizeDinosaur card={card} image={image} name={name} count={count} />
   </button>
 }
